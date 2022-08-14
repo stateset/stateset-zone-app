@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import Link from 'next/link'
 import OnboardingBar from 'components/OnboardingBar';
 import CreatePurchaseOrderModal from 'components/transactions/NewPOModal';
+import OptionModal from 'components/transactions/OptionModal';
 
 function PurchaseOrdersPage({ purchase_orders }) {
 
@@ -35,6 +36,8 @@ function PurchaseOrdersPage({ purchase_orders }) {
                                 </h2>
 
                                 <CreatePurchaseOrderModal />
+
+                                <OptionModal />
 
                                 <div className="dark:bg-slate-900 flex flex-col">
 
