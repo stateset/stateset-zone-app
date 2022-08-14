@@ -145,7 +145,7 @@ export default () => {
         console.log(st_balance);
 
         // Set mnemonic in env variable
-        const _mnemonic = "";
+        const _mnemonic = process.env.NEXT_PUBLIC_MNEMONIC;
 
         const _wallet = await DirectSecp256k1HdWallet.fromMnemonic(
             _mnemonic,
