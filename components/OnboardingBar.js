@@ -10,7 +10,6 @@ import {
   StarIcon,
 } from '@heroicons/react/solid'
 import { MenuAlt1Icon, XIcon } from '@heroicons/react/outline'
-import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 
 
 export default function OnboardingBar() {
@@ -30,9 +29,6 @@ export default function OnboardingBar() {
                   </dd>
                 </div>
                 <div className="lg:block lg:w-80">
-                  <div className="flex items-center justify-end">
-                    <UserButton userProfileURL="/user" afterSignOutAll="/" afterSignOutOneUrl="/" />
-                  </div>
                 </div>
               </div>
             </div>

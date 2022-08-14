@@ -18,6 +18,7 @@ export default () => {
         senderAddress: "",
         contractAddress: "",
         proof: "",
+        option: "",
         message: '',
         mnemonic: password
     })
@@ -56,8 +57,8 @@ export default () => {
     }
 
 
-    // Handle Swap Message
-    const handleVerify = async (input) => {
+    // Handle Finance Message
+    const handleFinance = async (input) => {
         setStatus(prevStatus => ({ ...prevStatus, submitting: true }))
 
         const defaultExecuteFee = unsafelyGetDefaultExecuteFee()
@@ -65,7 +66,10 @@ export default () => {
             // Verify Message
             const msg1 = {
                 verify: {
-                    proof: `${input.proof}`
+                    did: `${input.did}`,
+                    payload: `${input.payload}`,
+                    status: `${input.status}`
+                    
                 },
             }
 

@@ -1,4 +1,4 @@
-import { MsgExecuteContract } from 'statesetjs-types/cosmwasm/wasm/v1/tx'
+import { MsgExecuteContract } from 'cosmjs-types/cosmwasm/wasm/v1/tx'
 import React, { useState, Fragment } from 'react'
 
 
@@ -18,6 +18,7 @@ export default () => {
         senderAddress: "",
         contractAddress: "",
         proof: "",
+        option: "",
         message: '',
         mnemonic: password
     })
@@ -56,16 +57,22 @@ export default () => {
     }
 
 
-    // Handle Swap Message
-    const handleVerify = async (input) => {
+    // Handle Create Fixed Price NFT Message
+    const handleCreateFixedPriceNFT = async (input) => {
         setStatus(prevStatus => ({ ...prevStatus, submitting: true }))
 
         const defaultExecuteFee = unsafelyGetDefaultExecuteFee()
 
             // Verify Message
             const msg1 = {
-                verify: {
-                    proof: `${input.proof}`
+                instantiate: {
+                    max_toxens: 1,
+                    unit_price: `${input.unit_price}`,
+                    name: `${input.name}`,
+                    symbol: `${input.symbol}`,
+                    cw20_address: `${input.cw20_address}`,
+                    token_uri: `${input.token_uri}`,
+                    extension: `${input.extension}`
                 },
             }
 
@@ -106,9 +113,25 @@ export default () => {
 
     return (
         <main>
-            <input onChange={handleOnChange} value={inputs.proof}  />
-            {inputs.message}
-            <button onClick={handleVerify}></button>
+                        <div>
+                <label for="account-number" class="block text-sm font-medium text-gray-700 float-left">Name</label>
+                <div class="mt-2 relative rounded-md shadow-sm">
+                    <input type="text" name="did" id="did" class="focus:ring-blue-500 focus:border-blue-500 block w-full pr-10 sm:text-sm border-gray-300 rounded-md" placeholder="did:stateset:po..." onChange={handleOnChange} value={inputs.name} />
+                </div>
+            </div>
+            <div>
+                <label for="account-number" class="block text-sm font-medium text-gray-700 float-left">Unit Price</label>
+                <div class="mt-2 relative rounded-md shadow-sm">
+                    <input type="text" name="uri" id="uri" class="focus:ring-blue-500 focus:border-blue-500 block w-full pr-10 sm:text-sm border-gray-300 rounded-md" placeholder=".." onChange={handleOnChange} value={inputs.unit_price} />
+                </div>
+            </div>
+            <div>
+                <label for="account-number" class="block text-sm font-medium text-gray-700 float-left">Symbol</label>
+                <div class="mt-2 relative rounded-md shadow-sm">
+                    <input type="text" name="amount" id="amount" class="focus:ring-blue-500 focus:border-blue-500 block w-full pr-10 sm:text-sm border-gray-300 rounded-md" placeholder="..." onChange={handleOnChange} value={inputs.symbol} />
+                </div>
+            </div>
+            <button onClick={handleCreateFixedPriceNFT}></button>
         </main>
     )
 }
