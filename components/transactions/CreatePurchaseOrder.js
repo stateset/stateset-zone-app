@@ -104,8 +104,6 @@ export default () => {
             gas: "10000",
         };
 
-        // Inside an async function...
-        // This method uses the registry you provided
         const response = await client.signAndBroadcast(firstAccount.address, [message], fee);
     }
 
@@ -137,7 +135,7 @@ export default () => {
                 </div>
             </div>
             <button onClick={handleOnSubmit} type="button" class="mt-8 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                Create Purchase Order
+                Upload Purchase Order
             </button>
             <br />
         </main >

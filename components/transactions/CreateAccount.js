@@ -10,8 +10,6 @@ const QRCode = require('qrcode.react');
 import QrReader from 'react-qr-scanner'
 
 
-
-
 export default () => {
     const [status, setStatus] = useState({
         submitted: false,

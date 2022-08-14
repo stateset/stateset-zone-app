@@ -25,6 +25,7 @@
     "react-copy-to-clipboard": "^5.0.4",
     "react-dom": "^16.13.1",
     "react-qr-scanner": "^1.0.0-alpha.8",
+    "stateset-js": "^0.0.2",
     "tailwind": "^4.0.0",
     "uuidv4": "^6.2.12"
   },
