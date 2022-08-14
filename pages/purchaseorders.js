@@ -31,15 +31,17 @@ function PurchaseOrdersPage({ purchase_orders }) {
                             </div>
                             <body class="bg-white dark:bg-slate-900 antialiased font-sans">
 
-                                <h2 class="dark:text-white max-w-12xl mx-auto mt-8 px-4 text-lg leading-6 font-medium text-gray-900 sm:px-6 sm:mt-8 lg:px-4 mb-8">
+                                <h2 class="dark:text-white mx-auto  max-w-3xl mt-8 px-4 text-2xl leading-6 font-medium text-gray-900 sm:px-6 sm:mt-8 lg:px-4 mb-8">
                                     Purchase Orders
                                 </h2>
 
+                                <div class="max-w-3xl mx-auto">
                                 <CreatePurchaseOrderModal />
 
                                 <OptionModal />
+                                </div>
 
-                                <div className="dark:bg-slate-900 flex flex-col">
+                                <div className="mx-auto max-w-3xl dark:bg-slate-900 flex flex-col">
 
                                     <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                                         <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
