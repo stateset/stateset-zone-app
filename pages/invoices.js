@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
 import Link from 'next/link'
 import OnboardingBar from 'components/OnboardingBar';
+import CreatePurchaseOrderModal from 'components/transactions/NewPOModal';
+import OptionModal from 'components/transactions/OptionModal';
 
 function InvoicesPage({ invoices }) {
 
@@ -19,11 +21,9 @@ function InvoicesPage({ invoices }) {
                                         <nav class="flex space-x-4" aria-label="Tabs">
                                             <a href="/" class="dark:text-white text-gray-500 hover:text-gray-700 px-3 py-2 font-medium text-sm rounded-md">Wallet </a>
 
-                                            <a href="/agreements" class="dark:text-white text-gray-500 px-3 py-2 font-medium text-sm rounded-md" aria-current="page"> Agreements </a>
+                                            <a href="/invoices" class="dark:text-white underline text-gray-500 px-3 py-2 font-medium text-sm rounded-md" aria-current="page"> Invoices </a>
 
                                             <a href="/purchaseorders" class="dark:text-white text-gray-500 px-3 py-2 font-medium text-sm rounded-md" aria-current="page"> Purchase Orders </a>
-
-                                            <a href="/invoices" class="dark:text-white underline text-gray-500 px-3 py-2 font-medium text-sm rounded-md" aria-current="page"> Invoices </a>
 
                                             <a href="/commerce" class="dark:text-white text-gray-500 hover:text-gray-700 px-3 py-2 font-medium text-sm rounded-md"> Commerce</a>
 
@@ -33,11 +33,14 @@ function InvoicesPage({ invoices }) {
                             </div>
                             <body class="bg-white dark:bg-slate-900 antialiased font-sans">
 
-                                <h2 class="dark:text-white max-w-12xl mx-auto mt-8 px-4 text-lg leading-6 font-medium text-gray-900 sm:px-6 sm:mt-8 lg:px-4 mb-8">
+                                <h2 class="dark:text-white mx-auto  max-w-3xl mt-8 px-4 text-2xl leading-6 font-medium text-gray-900 sm:px-6 sm:mt-8 lg:px-4 mb-8">
                                     Invoices
                                 </h2>
 
-                                <div className="dark:bg-slate-900 flex flex-col">
+                                <div class="max-w-3xl mx-auto">
+                                </div>
+
+                                <div className="mx-auto max-w-3xl dark:bg-slate-900 flex flex-col">
 
                                     <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                                         <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
