@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import Link from 'next/link'
 import OnboardingBar from 'components/OnboardingBar';
-import CreatePurchaseOrderModal from 'components/transactions/NewPOModal';
 import OptionModal from 'components/transactions/OptionModal';
 
 function InvoicesPage({ invoices }) {
@@ -9,7 +8,7 @@ function InvoicesPage({ invoices }) {
     return (
 
 
-        <div class="dark">
+        <div class="">
             <OnboardingBar />
             <div class="h-screen flex overflow-hidden dark:bg-slate-900 bg-white">
                 <div class="flex flex-col w-0 flex-1 overflow-hidden">
@@ -38,6 +37,8 @@ function InvoicesPage({ invoices }) {
                                 </h2>
 
                                 <div class="max-w-3xl mx-auto">
+
+                                <OptionModal />
                                 </div>
 
                                 <div className="mx-auto max-w-3xl dark:bg-slate-900 flex flex-col">

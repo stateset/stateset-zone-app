@@ -53,7 +53,7 @@ function PurchaseOrderRecordPage({ purchase_order }) {
 
   return (
 
-  <div class="dark">
+  <div class="">
     <Head>
       <title>Purchase Order - Stateset</title>
     </Head>

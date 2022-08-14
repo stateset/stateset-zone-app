@@ -370,7 +370,7 @@ export default () => {
     };
 
     return (
-        <main class="dark">
+        <main class="">
             {qr_reader}
             <Transition.Root show={confirm} as={Fragment}>
                 <div aria-live="assertive" class="fixed inset-0 flex items-end px-4 py-6 pointer-events-none sm:p-6 sm:items-start">

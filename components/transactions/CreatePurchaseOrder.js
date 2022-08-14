@@ -84,7 +84,7 @@ export default () => {
         console.log(client);
 
         const message = {
-            typeUrl: "/stateset.core.purchaseorder.MsgRequestPurchaseorder", 
+            typeUrl: "/stateset.core.purchaseorder.MsgRequestPurchaseorder",
             value: MsgRequestPurchaseorder.fromPartial({
                 did: inputs.did,
                 uri: inputs.uri,
@@ -127,8 +127,8 @@ export default () => {
                 <div class="mt-2 relative rounded-md shadow-sm">
                     <input type="text" name="amount" id="amount" class="focus:ring-blue-500 focus:border-blue-500 block w-full pr-10 sm:text-sm border-gray-300 rounded-md" placeholder="" onChange={handleOnChange} value={inputs.amount} />
                     <span class="dark:text-white pt-5 text-gray-500 sm:text-sm" id="price-currency">
-                            STATE
-                        </span>
+                        STATE
+                    </span>
                 </div>
             </div>
             <div>

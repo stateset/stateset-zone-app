@@ -56,7 +56,7 @@ export default () => {
     }
 
 
-    // Handle Swap Message
+    // Handle Verify Message
     const handleVerify = async (input) => {
         setStatus(prevStatus => ({ ...prevStatus, submitting: true }))
 
