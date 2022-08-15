@@ -6,6 +6,14 @@
   "dependencies": {
     "@clerk/clerk-react": "^3.2.11",
     "@clerk/nextjs": "^3.5.0",
+    "@keplr-wallet/common": "^0.10.4",
+    "@keplr-wallet/cosmos": "^0.10.4",
+    "@keplr-wallet/crypto": "^0.10.4",
+    "@keplr-wallet/hooks": "^0.10.4",
+    "@keplr-wallet/stores": "^0.10.4",
+    "@keplr-wallet/types": "^0.10.4",
+    "@keplr-wallet/unit": "^0.10.4",
+    "@keplr-wallet/wc-client": "^0.10.4",
     "apollo-cache-inmemory": "^1.6.6",
     "apollo-client": "^2.6.10",
     "apollo-link": "^1.2.14",
@@ -17,8 +25,10 @@
     "framer-motion": "^6.2.7",
     "graphql-tag": "^2.12.6",
     "highlight.js": "^11.4.0",
+    "long": "^5.2.0",
     "modern-react-qr-reader": "^1.0.12",
     "next": "^10.0.0",
+    "protobufjs": "^7.0.0",
     "qrcode.react": "^1.0.1",
     "react": "^16.13.1",
     "react-apollo": "^3.1.5",
@@ -41,7 +51,9 @@
     "autoprefixer": "^10.4.2",
     "postcss": "^8.4.5",
     "postcss-preset-env": "^6.7.0",
-    "tailwindcss": "^3.0.15"
+    "protoc": "^1.0.4",
+    "tailwindcss": "^3.0.15",
+    "ts-proto": "^1.122.0"
   },
   "resolutions": {
     "webpack": "^5.0.0-beta.30"

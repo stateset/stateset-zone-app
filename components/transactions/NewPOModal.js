@@ -1,6 +1,6 @@
 import { Fragment, useRef, useState, useContext } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import CreatePurchaseOrderNFT from './CreatePurchaseOrderNFT'
+import CreatePurchaseOrder from './CreatePurchaseOrder'
 
 export default function CreatePurchaseOrderModal(props) {
 
@@ -54,7 +54,7 @@ export default function CreatePurchaseOrderModal(props) {
                       </Dialog.Title>
                     </div>
                   </div>
-                  <CreatePurchaseOrderNFT />
+                  <CreatePurchaseOrder />
                 </div>
               </div>
             </Transition.Child>
