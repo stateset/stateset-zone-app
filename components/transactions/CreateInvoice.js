@@ -58,10 +58,8 @@ export default () => {
     const handleOnSubmit = async e => {
         setStatus(prevStatus => ({ ...prevStatus, submitting: true }))
         const myRegistry = new Registry(defaultStargateTypes);
-        myRegistry.register("/stateset.core.purchaseorder.MsgRequestPurchaseorder", MsgRequestPurchaseorder);
-        myRegistry.register("/stateset.core.purchaseorder.MsgFinancePurchaseorder", MsgFinancePurchaseorder);
-        myRegistry.register("/stateset.core.purchaseorder.MsgCompletePurchaseorder", MsgCompletePurchaseorder);
-        myRegistry.register("/stateset.core.purchaseorder.MsgCancelPurchaseorder", MsgCancelPurchaseorder);
+        myRegistry.register("/stateset.core.invoice.MsgCreateInvoice", MsgCreateInvoice);
+        myRegistry.register("/stateset.core.invoice.MsgFactorInvoice", MsgFactorInvoice);
 
         const wallet = await DirectSecp256k1HdWallet.fromMnemonic(
             mnemonic,
@@ -84,8 +82,8 @@ export default () => {
         console.log(client);
 
         const message = {
-            typeUrl: "/stateset.core.purchaseorder.MsgRequestPurchaseorder",
-            value: MsgRequestPurchaseorder.fromPartial({
+            typeUrl: "/stateset.core.invoice.MsgCreateInvoice",
+            value: MsgCreateInvoice.fromPartial({
                 did: inputs.did,
                 uri: inputs.uri,
                 amount: inputs.amount,
@@ -138,7 +136,7 @@ export default () => {
                 </div>
             </div>
             <button onClick={handleOnSubmit} type="button" class="mt-8 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                Upload Purchase Order
+                Upload Invoice
             </button>
             <br />
         </main >

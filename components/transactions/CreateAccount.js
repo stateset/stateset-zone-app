@@ -728,7 +728,7 @@ export default () => {
                     </span>
                 </div>
                 <p className="dark:text-white py-4 text-sm tracking-tight text-gray-500 lg:visible md:visible invisible">
-                    Send a transaction
+                    Send transactions
                 </p>
             </div>
             <div>

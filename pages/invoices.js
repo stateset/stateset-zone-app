@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import Link from 'next/link'
 import OnboardingBar from 'components/OnboardingBar';
 import OptionModal from 'components/transactions/OptionModal';
+import CreateInvoiceModal from 'components/transactions/NewInvoiceModal';
 
 function InvoicesPage({ invoices }) {
 
@@ -38,6 +39,7 @@ function InvoicesPage({ invoices }) {
 
                                 <div class="max-w-3xl mx-auto">
 
+                                <CreateInvoiceModal />
                                 <OptionModal />
                                 </div>
 
