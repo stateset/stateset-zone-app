@@ -9,7 +9,7 @@ function PurchaseOrdersPage({ purchase_orders }) {
     return (
 
 
-        <div class="">
+        <div class="dark">
             <OnboardingBar />
             <div class="h-screen flex overflow-hidden dark:bg-slate-900 bg-white">
                 <div class="flex flex-col w-0 flex-1 overflow-hidden">

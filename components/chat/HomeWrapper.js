@@ -95,7 +95,7 @@ subscription ($last_received_id: String, $last_received_ts: String, $first_recei
               });
               return (
                 <>
-                  <div className="chatDialog">
+                  <div className="dark:bg-slate-900">
                     <motion.div initial="exit" animate="enter" exit="exit">
                       <motion.div variants={textVariants}>
                         <HomeTextbox username={this.props.user.username} user_id={this.props.user.id} />
