@@ -1,16 +1,6 @@
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import {
-  BadgeCheckIcon,
-  ChevronDownIcon,
-  ChevronRightIcon,
-  CollectionIcon,
-  SearchIcon,
-  SortAscendingIcon,
-  StarIcon,
-} from '@heroicons/react/solid'
-import { MenuAlt1Icon, XIcon } from '@heroicons/react/outline'
-
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 
 export default function OnboardingBar() {
 
@@ -28,8 +18,11 @@ export default function OnboardingBar() {
                   <dd className="mt-0 ml-2">
                   </dd>
                 </div>
-                <div className="lg:block lg:w-80">
+                <div className="pt-4 pb-3 border-t border-blue-800">
+                <div className="px-2 space-y-1 z-auto">
+                    <UserButton userProfileURL="/user" afterSignOutAll="/" afterSignOutOneUrl="/" />
                 </div>
+              </div>
               </div>
             </div>
           </>

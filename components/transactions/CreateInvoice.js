@@ -23,6 +23,7 @@ export default () => {
     })
 
     const [confirm, setConfirm] = useState(false);
+    const [error, setError] = useState(false);
 
     const [inputs, setInputs] = useState({
         recipient: '',
@@ -123,17 +124,24 @@ export default () => {
                 gas: "10000",
             };
 
-            const response = await client.signAndBroadcast(creator_address, [message], "auto", 'uploading a invoice from stateset zone');
+            const result = await client.signAndBroadcast(creator_address, [message], "auto", 'uploading a invoice from stateset zone');
 
-            console.log(response);
+            console.log(result)
+            if (result) {
+                setConfirm(true);
+            } else if (result.error) {
+                setError(true);
+            } else {
+                null
+            }
 
         }
     }
     
 
     return (
-        <main>
-            <Transition.Root show={confirm} as={Fragment}>
+        <>
+                   <Transition.Root show={confirm} as={Fragment}>
                 <div aria-live="assertive" class="fixed inset-0 flex items-end px-4 py-6 pointer-events-none sm:p-6 sm:items-start">
                     <div class="w-full flex flex-col items-center space-y-4 sm:items-end">
                         <Transition.Child
@@ -177,6 +185,7 @@ export default () => {
                     </div>
                 </div>
             </Transition.Root>
+        <main>
             <div>
             <div>
                 <label for="account-number" class="block text-sm font-medium text-gray-700 float-left">URI</label>
@@ -199,5 +208,6 @@ export default () => {
             </button>
             <br />
         </main >
+        </>
     )
 }
