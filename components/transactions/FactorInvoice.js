@@ -4,17 +4,13 @@ import { assertIsBroadcastTxSuccess, SigningStargateClient, StargateClient, defa
 import React, { useState } from 'react'
 
 import { Type, Field } from "protobufjs";
-import { uuid } from "uuidv4";
 
-const MsgCreateInvoice = new Type("MsgCreateInvoice")
+const MsgFactorInvoice = new Type("MsgFactorInvoice")
     .add(new Field("creator", 1, "string"))
-    .add(new Field("id", 2, "string"))
-    .add(new Field("did", 3, "string"))
-    .add(new Field("amount", 4, "string"))
-    .add(new Field("state", 5, "string"));
+    .add(new Field("id", 2, "uint64"));
 
 
-export default () => {
+export default (props) => {
     const [status, setStatus] = useState({
         submitted: false,
         submitting: false,
@@ -25,6 +21,7 @@ export default () => {
         recipient: '',
         amount: '',
         message: '',
+        id: props.id,
         did: "",
         amount: "",
         state: ""
@@ -67,7 +64,7 @@ export default () => {
         setStatus(prevStatus => ({ ...prevStatus, submitting: true }))
 
         const myRegistry = new Registry(defaultStargateTypes);
-        myRegistry.register("/stateset.core.invoice.MsgCreateInvoice", MsgCreateInvoice);
+        myRegistry.register("/stateset.core.invoice.MsgFactorInvoice", MsgFactorInvoice);
 
         const mnemonic = process.env.NEXT_PUBLIC_MNEMONIC;
 
@@ -96,16 +93,12 @@ export default () => {
 
         if (client) {
 
-            var _uuid = uuid();
 
             const message = {
-                typeUrl: "/stateset.core.invoice.MsgCreateInvoice",
+                typeUrl: "/stateset.core.invoice.MsgFactorInvoice",
                 value: {
                     creator: creator_address,
-                    id: _uuid,
-                    did: "did:stateset:inv:" + _uuid,
-                    amount: inputs.amount,
-                    state: "request"
+                    id: parseInt(inputs.id),
                 },
             };
 
@@ -130,28 +123,9 @@ export default () => {
 
     return (
         <main>
-            <label htmlFor="message"></label>
-            <div>
-            <div>
-                <label for="account-number" class="block text-sm font-medium text-gray-700 float-left">URI</label>
-                <div class="mt-2 relative rounded-md shadow-sm">
-                    <input type="text" name="uri" id="uri" class="focus:ring-blue-500 focus:border-blue-500 block w-full pr-10 sm:text-sm border-gray-300 rounded-md" placeholder="" onChange={handleOnChange} value={inputs.uri} />
-                </div>
-            </div>
-                <label for="account-number" class="block text-sm font-medium text-gray-700 float-left">Amount</label>
-                <div class="mt-2 relative rounded-md shadow-sm">
-                    <input type="text" name="amount" id="amount" class="focus:ring-blue-500 focus:border-blue-500 block w-full pr-10 sm:text-sm border-gray-300 rounded-md" placeholder="" onChange={handleOnChange} value={inputs.unit_price} />
-                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                        <span class="dark:text-white pt-5 text-gray-500 sm:text-sm" id="price-currency">
-                            STATE
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <button onClick={handleOnSubmit} type="button" class="mt-8 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                Upload Invoice
+            <button onClick={handleOnSubmit} type="button" class="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                Factor
             </button>
-            <br />
         </main >
     )
 }

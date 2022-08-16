@@ -3,6 +3,8 @@ import Link from 'next/link'
 import OnboardingBar from 'components/OnboardingBar';
 import OptionModal from 'components/transactions/OptionModal';
 import CreateInvoiceModal from 'components/transactions/NewInvoiceModal';
+import FactorInvoiceModal from 'components/transactions/FactorInvoiceModal';
+import FactorInvoice from 'components/transactions/FactorInvoice';
 
 function InvoicesPage({ invoices }) {
 
@@ -69,14 +71,21 @@ function InvoicesPage({ invoices }) {
                                                             >
                                                                 Total
                                                             </th>
+                                                            <th
+                                                                scope="col"
+                                                                className="dark:text-white px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                                            >
+                                                                
+                                                            </th>
                                                         </tr>
                                                     </thead>
                                                     <tbody className="dark:text-white dark:bg-slate-900 bg-white divide-y divide-gray-200">
                                                         {invoices.map((invoice) => (
-                                                            <tr key={invoice.linearId}>
+                                                            <tr key={invoice.id}>
                                                                 <td className="px-6 py-4 whitespace-nowrap text-base font-medium text-gray-900"><a href={invoice.did} class="dark:text-white">{invoice.did}</a></td>
                                                                 <td class="dark:text-white dark:bg-slate-900 px-5 py-5 border-b border-gray-200 bg-white text-base"><p class="dark:text-slate-900 px-2 mt-1 truncate inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">{invoice.state}</p></td>
                                                                 <td class="dark:text-white dark:bg-slate-900 px-5 py-5 border-b border-gray-200 bg-white text-base"><p class="dark:text-white text-gray-900 whitespace-no-wrap">ⓢ {invoice.amount}</p></td>
+                                                                <td><FactorInvoice id={invoice.id} /></td>
                                                             </tr>
                                                         ))}
                                                     </tbody>
