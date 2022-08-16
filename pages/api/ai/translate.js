@@ -1,6 +1,8 @@
 const fetch = require('node-fetch');
 
-export default async function(req, res) {
+export default withAuth((req, res) => {
+
+  if (req.auth.sessionId) {
 
     var response = '';
     var PROMPT = `${req.body.body}`;
@@ -26,4 +28,9 @@ export default async function(req, res) {
       console.error(error);
       return res.status(500).send('An error occurred');
     })
-  };
+
+} else {
+  res.status(401).json({ id: null });
+}
+
+});

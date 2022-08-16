@@ -1,6 +1,8 @@
 const fetch = require('node-fetch');
 
-export default async function(req, res) {
+export default withAuth((req, res) => {
+
+  if (req.auth.sessionId) {
 
   var response = '';
   var PROMPT = `The following is a message sent from ${req.body.from} to ${req.body.to}, two eCommerce companies. The subject of the message is ${req.body.subject}.
@@ -30,4 +32,9 @@ export default async function(req, res) {
     console.error(error);
     res.status(500).send('An error occurred');
   })
-};
+  
+} else {
+  res.status(401).json({ id: null });
+}
+
+});

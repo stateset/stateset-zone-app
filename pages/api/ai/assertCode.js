@@ -17,7 +17,7 @@ export default async function(req, res) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer sk-b0ZEgeW9ILhQHViOmysmJoodtRKenV6HtvfQGSrE'
+        'Authorization': process.env.OPEN_AI
       },
       body: raw,
       redirect: 'follow'
