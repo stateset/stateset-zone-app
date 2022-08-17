@@ -23,6 +23,7 @@ export default () => {
     })
 
     const [inputs, setInputs] = useState({
+        mnemonic: password,
         recipient: '',
         amount: '',
         message: '',
@@ -71,10 +72,8 @@ export default () => {
         const myRegistry = new Registry(defaultStargateTypes);
         myRegistry.register("/stateset.core.purchaseorder.MsgRequestPurchaseorder", MsgRequestPurchaseorder);
 
-        const mnemonic = process.env.NEXT_PUBLIC_MNEMONIC;
-
         const wallet = await DirectSecp256k1HdWallet.fromMnemonic(
-            mnemonic,
+            inputs.mnemonic,
             { prefix: "stateset" },
         );
 

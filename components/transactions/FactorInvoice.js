@@ -10,6 +10,11 @@ const MsgFactorInvoice = new Type("MsgFactorInvoice")
     .add(new Field("creator", 1, "string"))
     .add(new Field("id", 2, "uint64"));
 
+var password = '';
+if (process.browser) {
+    password = localStorage.getItem("mnemonic")
+};
+
 
 export default (props) => {
     const [status, setStatus] = useState({
@@ -21,6 +26,7 @@ export default (props) => {
     const [confirm, setConfirm] = useState(false);
 
     const [inputs, setInputs] = useState({
+        mnemonic: password,
         recipient: '',
         amount: '',
         message: '',
@@ -69,10 +75,8 @@ export default (props) => {
         const myRegistry = new Registry(defaultStargateTypes);
         myRegistry.register("/stateset.core.invoice.MsgFactorInvoice", MsgFactorInvoice);
 
-        const mnemonic = process.env.NEXT_PUBLIC_MNEMONIC;
-
         const wallet = await DirectSecp256k1HdWallet.fromMnemonic(
-            mnemonic,
+            inputs.mnemonic,
             { prefix: "stateset" },
         );
 
@@ -135,9 +139,7 @@ export default (props) => {
                             entering="transform ease-out duration-300 transition"
                             from="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
                             to="translate-y-0 opacity-100 sm:translate-x-0"
-                            leaving="transition ease-in duration-100"
-                            from="opacity-100"
-                            to="opacity-0"                                   
+                            leaving="transition ease-in duration-100"                               
                         >
                             <div class="max-w-sm w-full bg-white shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden">
                                 <div class="p-4">

@@ -14,6 +14,11 @@ const MsgRequestLoan = new Type("MsgRequestLoan")
     .add(new Field("collateral", 4, "string"))
     .add(new Field("deadline", 5, "string"));
 
+var password = '';
+if (process.browser) {
+    password = localStorage.getItem("mnemonic")
+};
+
 
 export default () => {
     const [status, setStatus] = useState({
@@ -26,6 +31,7 @@ export default () => {
     const [error, setError] = useState(false);
 
     const [inputs, setInputs] = useState({
+        mnemonic: password,
         amount: '',
         fee: '',
         collateral: "",
@@ -71,10 +77,8 @@ export default () => {
         const myRegistry = new Registry(defaultStargateTypes);
         myRegistry.register("/stateset.core.loan.MsgRequestLoan", MsgRequestLoan);
 
-        const mnemonic = process.env.NEXT_PUBLIC_MNEMONIC;
-
         const wallet = await DirectSecp256k1HdWallet.fromMnemonic(
-            mnemonic,
+            inputs.mnemonic,
             { prefix: "stateset" },
         );
 

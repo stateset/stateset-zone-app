@@ -10,6 +10,10 @@ const MsgApproveLoan = new Type("MsgApproveLoan")
     .add(new Field("creator", 1, "string"))
     .add(new Field("id", 2, "uint64"));
 
+var password = '';
+if (process.browser) {
+    password = localStorage.getItem("mnemonic")
+};
 
 export default (props) => {
     const [status, setStatus] = useState({
@@ -21,6 +25,7 @@ export default (props) => {
     const [confirm, setConfirm] = useState(false);
 
     const [inputs, setInputs] = useState({
+        mnemonic: password,
         recipient: '',
         amount: '',
         message: '',
@@ -63,16 +68,14 @@ export default (props) => {
         })
     }
 
-    const handleOnSubmit = async() => {
+    const handleOnSubmit = async () => {
         setStatus(prevStatus => ({ ...prevStatus, submitting: true }))
 
         const myRegistry = new Registry(defaultStargateTypes);
         myRegistry.register("/stateset.core.loan.MsgApproveLoan", MsgApproveLoan);
 
-        const mnemonic = process.env.NEXT_PUBLIC_MNEMONIC;
-
         const wallet = await DirectSecp256k1HdWallet.fromMnemonic(
-            mnemonic,
+            inputs.mnemonic,
             { prefix: "stateset" },
         );
 
@@ -87,7 +90,7 @@ export default (props) => {
         if (firstAccount) {
 
             creator_address = firstAccount[0].address;
-        
+
         }
 
         const rpcEndpoint = "https://rpc.stateset.zone";
@@ -123,7 +126,7 @@ export default (props) => {
 
         }
     }
-    
+
 
     return (
         <main>
@@ -136,7 +139,7 @@ export default (props) => {
                             from="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
                             to="translate-y-0 opacity-100 sm:translate-x-0"
                             leaving="transition ease-in duration-100"
-                             
+
                         >
                             <div class="max-w-sm w-full bg-white shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden">
                                 <div class="p-4">
@@ -152,7 +155,7 @@ export default (props) => {
                                                 Transaction Success
                                             </p>
                                             <p class="mt-1 text-xs text-gray-500">
-                                                Loan Approved Factored. Anyone with a link can now view this transaction.
+                                                Loan Approved. Anyone with a link can now view this transaction.
                                             </p>
                                         </div>
                                         <div class="ml-4 flex-shrink-0 flex">
