@@ -36,7 +36,7 @@ const handleShare = async e => {
 
 
 const SendTransactionPage = () => (
-    <div class="">
+    <div class="dark">
         <Head>
             <title>Stateset Zone App</title>
             <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />

@@ -5,17 +5,13 @@ import React, { useState, Fragment, useEffect } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 
 import { Type, Field } from "protobufjs";
-import { uuid } from "uuidv4";
 
-const MsgCreateInvoice = new Type("MsgCreateInvoice")
+const MsgCancelLoan = new Type("MsgCancelLoan")
     .add(new Field("creator", 1, "string"))
-    .add(new Field("id", 2, "string"))
-    .add(new Field("did", 3, "string"))
-    .add(new Field("amount", 4, "string"))
-    .add(new Field("state", 5, "string"));
+    .add(new Field("id", 2, "uint64"));
 
 
-export default () => {
+export default (props) => {
     const [status, setStatus] = useState({
         submitted: false,
         submitting: false,
@@ -23,12 +19,12 @@ export default () => {
     })
 
     const [confirm, setConfirm] = useState(false);
-    const [error, setError] = useState(false);
 
     const [inputs, setInputs] = useState({
         recipient: '',
         amount: '',
         message: '',
+        id: props.id,
         did: "",
         amount: "",
         state: ""
@@ -71,7 +67,7 @@ export default () => {
         setStatus(prevStatus => ({ ...prevStatus, submitting: true }))
 
         const myRegistry = new Registry(defaultStargateTypes);
-        myRegistry.register("/stateset.core.invoice.MsgCreateInvoice", MsgCreateInvoice);
+        myRegistry.register("/stateset.core.loan.MsgCancelLoan", MsgCancelLoan);
 
         const mnemonic = process.env.NEXT_PUBLIC_MNEMONIC;
 
@@ -100,16 +96,12 @@ export default () => {
 
         if (client) {
 
-            var _uuid = uuid();
 
             const message = {
-                typeUrl: "/stateset.core.invoice.MsgCreateInvoice",
+                typeUrl: "/stateset.core.loan.MsgCancelLoan",
                 value: {
                     creator: creator_address,
-                    id: _uuid,
-                    did: "did:cosmos:1:stateset:inv:" + _uuid,
-                    amount: inputs.amount,
-                    state: "request"
+                    id: parseInt(inputs.id),
                 },
             };
 
@@ -124,24 +116,18 @@ export default () => {
                 gas: "10000",
             };
 
-            const result = await client.signAndBroadcast(creator_address, [message], "auto", 'uploading a invoice from stateset zone');
+            const response = await client.signAndBroadcast(creator_address, [message], "auto", 'canceling a loan from stateset zone');
 
-            console.log(result)
-            if (result) {
-                setConfirm(true);
-            } else if (result.error) {
-                setError(true);
-            } else {
-                null
-            }
+            console.log(response);
+            setConfirm(true);
 
         }
     }
     
 
     return (
-        <>
-                   <Transition.Root show={confirm} as={Fragment}>
+        <main>
+            <Transition.Root show={confirm} as={Fragment}>
                 <div aria-live="assertive" class="fixed inset-0 flex items-end px-4 py-6 pointer-events-none sm:p-6 sm:items-start">
                     <div class="w-full flex flex-col items-center space-y-4 sm:items-end">
                         <Transition.Child
@@ -149,9 +135,7 @@ export default () => {
                             entering="transform ease-out duration-300 transition"
                             from="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
                             to="translate-y-0 opacity-100 sm:translate-x-0"
-                            leaving="transition ease-in duration-100"
-                            from="opacity-100"
-                            to="opacity-0"                                   
+                            leaving="transition ease-in duration-100"                                
                         >
                             <div class="max-w-sm w-full bg-white shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden">
                                 <div class="p-4">
@@ -167,7 +151,7 @@ export default () => {
                                                 Transaction Success
                                             </p>
                                             <p class="mt-1 text-xs text-gray-500">
-                                                Invoice Created Anyone with a link can now view this transaction.
+                                                Loan Canceled. Anyone with a link can now view this transaction.
                                             </p>
                                         </div>
                                         <div class="ml-4 flex-shrink-0 flex">
@@ -185,29 +169,9 @@ export default () => {
                     </div>
                 </div>
             </Transition.Root>
-        <main>
-            <div>
-            <div>
-                <label for="account-number" class="block text-sm font-medium text-gray-700 float-left">URI</label>
-                <div class="mt-2 relative rounded-md shadow-sm">
-                    <input type="text" name="uri" id="uri" class="focus:ring-blue-500 focus:border-blue-500 block w-full pr-10 sm:text-sm border-gray-300 rounded-md" placeholder="" onChange={handleOnChange} value={inputs.uri} />
-                </div>
-            </div>
-                <label for="account-number" class="block text-sm font-medium text-gray-700 float-left">Amount</label>
-                <div class="mt-2 relative rounded-md shadow-sm">
-                    <input type="text" name="amount" id="amount" class="focus:ring-blue-500 focus:border-blue-500 block w-full pr-10 sm:text-sm border-gray-300 rounded-md" placeholder="" onChange={handleOnChange} value={inputs.unit_price} />
-                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                        <span class="dark:text-white pt-5 text-gray-500 sm:text-sm" id="price-currency">
-                            STATE
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <button onClick={handleOnSubmit} type="button" class="mt-8 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                Upload Invoice
+            <button onClick={handleOnSubmit} type="button" class="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                Cancel
             </button>
-            <br />
         </main >
-        </>
     )
 }

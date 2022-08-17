@@ -14,6 +14,7 @@ import {
     BadgeCheckIcon,
     CashIcon,
     ClockIcon,
+    DocumentTextIcon,
     ReceiptRefundIcon,
     HomeIcon,
     CalendarIcon,
@@ -41,7 +42,9 @@ function classNames(...classes) {
 const navigation = [
     { name: 'Home', href: '/home', icon: HomeIcon, current: true },
     { name: 'Invoices', href: '/invoices', icon: ReceiptRefundIcon, current: false },
-    { name: 'Purchase Orders', href: '/purchaseorders', icon: RefreshIcon, current: false }
+    { name: 'Purchase Orders', href: '/purchaseorders', icon: DocumentTextIcon, current: false },
+    { name: 'Loans', href: '/loans', icon: CashIcon, current: false }
+    
 ]
 
 const Home = () => {
@@ -60,7 +63,7 @@ const Home = () => {
                     <div className="flex-1 min-w-0 dark:bg-slate-900 bg-white xl:flex">
                         <div className="border-b border-gray-200 xl:border-b-0 xl:flex-shrink-0 xl:w-64 xl:border-r xl:border-gray-200 dark:bg-slate-900 bg-white">
                             <div className="h-full pl-4 pr-6 py-6 sm:pl-6 lg:pl-8 xl:pl-0">
-                                <h2 class="text-lg text-slate-900 font-semibold">Welcome, {user.username}</h2>
+                                <h2 class="text-lg dark:text-white text-slate-900 font-semibold">Welcome, {user.username}</h2>
                                 <div className="h-full relative" style={{ minHeight: '12rem' }}>
                                     <div className="rounded-lg" />
                                     <nav className="mt-5 flex-1">

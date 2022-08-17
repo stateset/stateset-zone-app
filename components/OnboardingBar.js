@@ -14,6 +14,7 @@ export default function OnboardingBar() {
                 {/* Logo section */}
                 <div className="flex items-center px-2 lg:px-0 xl:w-64">
                   <div className="flex-shrink-0">
+                    <img className="h-8 w-22" src="/statesetwhitelogo.svg"/>
                   </div>
                   <dd className="mt-0 ml-2">
                   </dd>
