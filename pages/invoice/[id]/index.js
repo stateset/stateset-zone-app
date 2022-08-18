@@ -193,10 +193,10 @@ console.log(invoice);
       </div>
       <div class="sm:col-span-1">
         <dt class="text-base font-medium text-gray-500 dark:text-white">
-          Purchase Order Email address
+          Purchaser
         </dt>
         <dd class="mt-1 text-base text-gray-900 dark:text-white">
-          *********@example.com
+          {invoice.purchaser}
         </dd>
       </div>
       <div class="sm:col-span-1">
@@ -209,26 +209,27 @@ console.log(invoice);
       </div>
       <div class="sm:col-span-1">
         <dt class="text-base font-medium text-gray-500 dark:text-white">
+          Seller
+        </dt>
+        <dd class="mt-1 text-base text-gray-900 dark:text-white">
+          {invoice.seller}
+        </dd>
+      </div>
+      <div class="sm:col-span-1">
+        <dt class="text-base font-medium text-gray-500 dark:text-white">
           Invoice State
         </dt>
         <dd class="px-2 mt-1 truncate inline-flex  leading-5 font-semibold rounded-full bg-green-100 text-green-800">
          {invoice.state}
         </dd>
       </div>
+
       <div class="sm:col-span-1">
         <dt class="text-base font-medium text-gray-500 dark:text-white">
-          Vendor
+          Factor
         </dt>
         <dd class="mt-1 text-base text-gray-900 dark:text-white">
-          WhiteHaute Inc.
-        </dd>
-      </div>
-      <div class="sm:col-span-2">
-        <dt class="text-base font-medium text-gray-500 dark:text-white">
-         Details
-        </dt>
-        <dd class="mt-1 text-base text-gray-900 dark:text-white">
-         
+          {invoice.factor}
         </dd>
       </div>
       <div class="sm:col-span-2">

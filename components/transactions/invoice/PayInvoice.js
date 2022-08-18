@@ -155,7 +155,7 @@ export default (props) => {
                                                 Transaction Success
                                             </p>
                                             <p class="mt-1 text-xs text-gray-500">
-                                                Pay Invoice. Anyone with a link can now view this transaction.
+                                                Invoiced Paid. Anyone with a link can now view this transaction.
                                             </p>
                                         </div>
                                         <div class="ml-4 flex-shrink-0 flex">
