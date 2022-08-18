@@ -12,7 +12,9 @@ const MsgCreateInvoice = new Type("MsgCreateInvoice")
     .add(new Field("id", 2, "string"))
     .add(new Field("did", 3, "string"))
     .add(new Field("amount", 4, "string"))
-    .add(new Field("state", 5, "string"));
+    .add(new Field("state", 5, "string"))
+    .add(new Field("seller", 6, "string"))
+    .add(new Field("purchaser", 7, "string"))
 
 
 var password = '';
@@ -114,7 +116,10 @@ export default () => {
                     id: _uuid,
                     did: "did:cosmos:1:stateset:invoice:" + _uuid,
                     amount: inputs.amount,
-                    state: "request"
+                    state: "request",
+                    seller: creator_address,
+                    purchaser: inputs.recipient
+
                 },
             };
 
@@ -193,12 +198,12 @@ export default () => {
             <main>
                 <div>
                     <div>
-                        <label for="account-number" class="block text-sm font-medium text-gray-700 float-left">URI</label>
+                        <label for="account-number" class="dark:text-white block text-sm font-medium text-gray-700 float-left">To Address</label>
                         <div class="mt-2 relative rounded-md shadow-sm">
-                            <input type="text" name="uri" id="uri" class="focus:ring-blue-500 focus:border-blue-500 block w-full pr-10 sm:text-sm border-gray-300 rounded-md" placeholder="" onChange={handleOnChange} value={inputs.uri} />
+                            <input type="text" name="recipient" id="recipient" class="dark:bg-slate-900 dark:text-white focus:ring-blue-500 focus:border-blue-500 block w-full pr-2 text-ellipsis truncate sm:text-sm border-gray-300 rounded-md" placeholder="stateset28x8..." onChange={handleOnChange} value={inputs.recipient} />
                         </div>
                     </div>
-                    <label for="account-number" class="block text-sm font-medium text-gray-700 float-left">Amount</label>
+                    <label for="account-number" class="block text-sm font-medium text-gray-700 float-left">Invoice Amount</label>
                     <div class="mt-2 relative rounded-md shadow-sm">
                         <input type="text" name="amount" id="amount" class="focus:ring-blue-500 focus:border-blue-500 block w-full pr-10 sm:text-sm border-gray-300 rounded-md" placeholder="" onChange={handleOnChange} value={inputs.unit_price} />
                         <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
