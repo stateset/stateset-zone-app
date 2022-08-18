@@ -5,6 +5,7 @@ import OptionModal from 'components/transactions/OptionModal';
 import CreateInvoiceModal from 'components/transactions/invoice/NewInvoiceModal';
 import FactorInvoiceModal from 'components/transactions/invoice/FactorInvoiceModal';
 import FactorInvoice from 'components/transactions/invoice/FactorInvoice';
+import { HomeIcon } from '@heroicons/react/solid'
 
 function InvoicesPage({ invoices }) {
 
@@ -21,13 +22,19 @@ function InvoicesPage({ invoices }) {
                                 <div class="max-w-8xl mb-4 mt-3 text-lg">
                                     <div class="float-right sm:block">
                                         <nav class="flex space-x-4" aria-label="Tabs">
+
+                                            <a href="/home" className="text-gray-400 px-3 py-2 hover:text-gray-500 dark:text-white">
+                                                <HomeIcon className="flex-shrink-0 h-5 w-5" aria-hidden="true" />
+                                                <span className="sr-only">Home</span>
+                                            </a>
+
                                             <a href="/" class="dark:text-white text-gray-500 hover:text-gray-700 px-3 py-2 font-medium text-sm rounded-md">Wallet </a>
 
                                             <a href="/invoices" class="dark:text-white underline text-gray-500 px-3 py-2 font-medium text-sm rounded-md" aria-current="page"> Invoices </a>
 
-                                            <a href="/loans" class="dark:text-white text-gray-500 px-3 py-2 font-medium text-sm rounded-md" aria-current="page"> Loans </a>
+                                            <a href="/loans" class="dark:text-white text-gray-500 px-3 py-2 font-medium text-sm rounded-md" > Loans </a>
 
-                                            <a href="/purchaseorders" class="dark:text-white text-gray-500 px-3 py-2 font-medium text-sm rounded-md" aria-current="page"> Purchase Orders </a>
+                                            <a href="/purchaseorders" class="dark:text-white text-gray-500 px-3 py-2 font-medium text-sm rounded-md"> Purchase Orders </a>
 
                                         </nav>
                                     </div>
@@ -41,8 +48,8 @@ function InvoicesPage({ invoices }) {
 
                                 <div class="max-w-5xl mx-auto">
 
-                                <CreateInvoiceModal />
-                                <OptionModal />
+                                    <CreateInvoiceModal />
+                                    <OptionModal />
                                 </div>
 
                                 <div className="mx-auto max-w-5xl dark:bg-slate-900 flex flex-col">
@@ -53,6 +60,12 @@ function InvoicesPage({ invoices }) {
                                                 <table className="mt-2 min-w-full divide-y divide-gray-200">
                                                     <thead className="dark:bg-slate-900 bg-gray-50">
                                                         <tr>
+                                                            <th
+                                                                scope="col"
+                                                                className="dark:text-white px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                                            >
+                                                                DID
+                                                            </th>
                                                             <th
                                                                 scope="col"
                                                                 className="dark:text-white px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
@@ -75,7 +88,7 @@ function InvoicesPage({ invoices }) {
                                                                 scope="col"
                                                                 className="dark:text-white px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                                                             >
-                                                                
+
                                                             </th>
                                                         </tr>
                                                     </thead>

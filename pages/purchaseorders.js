@@ -3,6 +3,8 @@ import Link from 'next/link'
 import OnboardingBar from 'components/OnboardingBar';
 import CreatePurchaseOrderModal from 'components/transactions/purchaseorder/NewPOModal';
 import OptionModal from 'components/transactions/OptionModal';
+import { HomeIcon } from '@heroicons/react/solid'
+
 
 function PurchaseOrdersPage({ purchase_orders }) {
 
@@ -19,6 +21,12 @@ function PurchaseOrdersPage({ purchase_orders }) {
                                 <div class="max-w-8xl mb-4 mt-3 text-lg">
                                     <div class="float-right sm:block">
                                         <nav class="flex space-x-4" aria-label="Tabs">
+
+                                            <a href="/home" className="text-gray-400 px-3 py-2 hover:text-gray-500 dark:text-white">
+                                                <HomeIcon className="flex-shrink-0 h-5 w-5" aria-hidden="true" />
+                                                <span className="sr-only">Home</span>
+                                            </a>
+
                                             <a href="/" class="dark:text-white text-gray-500 hover:text-gray-700 px-3 py-2 font-medium text-sm rounded-md">Wallet </a>
 
                                             <a href="/invoices" class="dark:text-white text-gray-500 px-3 py-2 font-medium text-sm rounded-md" aria-current="page"> Invoices </a>
@@ -38,9 +46,9 @@ function PurchaseOrdersPage({ purchase_orders }) {
                                 </h2>
 
                                 <div class="max-w-5xl mx-auto">
-                                <CreatePurchaseOrderModal />
+                                    <CreatePurchaseOrderModal />
 
-                                <OptionModal />
+                                    <OptionModal />
                                 </div>
 
                                 <div className="mx-auto max-w-5xl dark:bg-slate-900 flex flex-col">

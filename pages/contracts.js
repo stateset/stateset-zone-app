@@ -9,7 +9,7 @@ import CreateVote from 'components/transactions/CreateVote'
 import CreateContract from 'components/transactions/contract/CreateContract'
 import UploadSmartContract from 'components/transactions/contract/UploadSmartContract'
 import { motion } from 'framer-motion';
-import CreateSwap from 'components/transactions/CreateSwap'
+import CreateSwap from 'components/transactions/contract/CreateSwap'
 
 let easing = [0.175, 0.85, 0.42, 0.96];
 
