@@ -2,14 +2,14 @@ import Head from 'next/head'
 import Image from 'next/image'
 import OnboardingBar from 'components/OnboardingBar';
 import CreateTransaction from 'components/transactions/CreateTransaction'
-import CreatePuchaseOrder from 'components/transactions/CreatePurchaseOrder'
+import CreatePuchaseOrder from 'components/transactions/purchaseorder/CreatePurchaseOrder'
 import DelegateState from 'components/transactions/DelegateState'
-import CreateAccount from 'components/transactions/CreateAccount'
+import CreateAccount from 'components/transactions/account/CreateAccount'
 import CreateVote from 'components/transactions/CreateVote'
-import CreateContract from 'components/transactions/CreateContract'
-import UploadSmartContract from 'components/transactions/UploadSmartContract'
+import CreateContract from 'components/transactions/contract/CreateContract'
+import UploadSmartContract from 'components/transactions/contract/UploadSmartContract'
 import { motion } from 'framer-motion';
-import CreateToken from 'components/transactions/CreateToken'
+import CreateToken from 'components/transactions/contract/CreateToken'
 
 let easing = [0.175, 0.85, 0.42, 0.96];
 

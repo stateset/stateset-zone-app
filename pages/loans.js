@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useContext } from 'react';
 import Link from 'next/link'
 import OnboardingBar from 'components/OnboardingBar';
-import CreateLoanModal from 'components/transactions/NewLoanModal';
-import ApproveLoan from 'components/transactions/ApproveLoan';
-import CancelLoan from 'components/transactions/CancelLoan';
-import RepayLoan from 'components/transactions/RepayLoan';
-import LiquidateLoan from 'components/transactions/LiquidateLoan';
+import CreateLoanModal from 'components/transactions/loan/NewLoanModal';
+import ApproveLoan from 'components/transactions/loan/ApproveLoan';
+import CancelLoan from 'components/transactions/loan/CancelLoan';
+import RepayLoan from 'components/transactions/loan/RepayLoan';
+import LiquidateLoan from 'components/transactions/loan/LiquidateLoan';
 
 function LoansPage({ loans }) {
 

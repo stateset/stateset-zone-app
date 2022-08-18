@@ -1,6 +1,6 @@
 import { Fragment, useRef, useState, useContext } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import CreatePurchaseOrder from './CreatePurchaseOrder'
+import CreatePurchaseOrder from '../purchaseorder/CreatePurchaseOrder'
 import CreateLoanRequest from './CreateLoanRequest'
 
 export default function NewLoanModal(props) {

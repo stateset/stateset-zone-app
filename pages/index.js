@@ -2,12 +2,12 @@ import Head from 'next/head'
 import Image from 'next/image'
 import OnboardingBar from 'components/OnboardingBar';
 import CreateTransaction from 'components/transactions/CreateTransaction'
-import CreatePuchaseOrder from 'components/transactions/CreatePurchaseOrder'
+import CreatePuchaseOrder from 'components/transactions/purchaseorder/CreatePurchaseOrder'
 import DelegateState from 'components/transactions/DelegateState'
-import CreateAccount from 'components/transactions/CreateAccount'
+import CreateAccount from 'components/transactions/account/CreateAccount'
 import CreateVote from 'components/transactions/CreateVote'
-import CreateContract from 'components/transactions/CreateContract'
-import UploadSmartContract from 'components/transactions/UploadSmartContract'
+import CreateContract from 'components/transactions/contract/CreateContract'
+import UploadSmartContract from 'components/transactions/contract/UploadSmartContract'
 import ChatWrapper from 'components/chat/ChatWrapper';
 import { motion } from 'framer-motion';
 
@@ -59,7 +59,6 @@ const SendTransactionPage = () => (
                                             <a href="/loans" class="dark:text-white text-gray-500 px-3 py-2 font-medium text-sm rounded-md" aria-current="page"> Loans </a>
 
                                             <a href="/purchaseorders" class="dark:text-white text-gray-500 px-3 py-2 font-medium text-sm rounded-md" aria-current="page"> Purchase Orders </a>
-
 
                                         </nav>
                                     </div>

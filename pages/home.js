@@ -32,7 +32,7 @@ import {
     MapIcon,
     UsersIcon,
 } from '@heroicons/react/outline'
-import CreateAccount from 'components/transactions/CreateAccount';
+import CreateAccount from 'components/transactions/account/CreateAccount';
 
 
 function classNames(...classes) {

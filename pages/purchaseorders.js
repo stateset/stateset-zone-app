@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import Link from 'next/link'
 import OnboardingBar from 'components/OnboardingBar';
-import CreatePurchaseOrderModal from 'components/transactions/NewPOModal';
+import CreatePurchaseOrderModal from 'components/transactions/purchaseorder/NewPOModal';
 import OptionModal from 'components/transactions/OptionModal';
 
 function PurchaseOrdersPage({ purchase_orders }) {

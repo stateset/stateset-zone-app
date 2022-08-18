@@ -2,9 +2,9 @@ import React, { useEffect, useState, useContext } from 'react';
 import Link from 'next/link'
 import OnboardingBar from 'components/OnboardingBar';
 import OptionModal from 'components/transactions/OptionModal';
-import CreateInvoiceModal from 'components/transactions/NewInvoiceModal';
-import FactorInvoiceModal from 'components/transactions/FactorInvoiceModal';
-import FactorInvoice from 'components/transactions/FactorInvoice';
+import CreateInvoiceModal from 'components/transactions/invoice/NewInvoiceModal';
+import FactorInvoiceModal from 'components/transactions/invoice/FactorInvoiceModal';
+import FactorInvoice from 'components/transactions/invoice/FactorInvoice';
 
 function InvoicesPage({ invoices }) {
 

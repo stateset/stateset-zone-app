@@ -1,6 +1,6 @@
 import { Fragment, useRef, useState, useContext } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import CreateOption from './CreateOption'
+import CreateOption from './contract/CreateOption'
 
 export default function CreatePurchaseOrderModal(props) {
 
