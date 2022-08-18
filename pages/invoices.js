@@ -5,6 +5,8 @@ import OptionModal from 'components/transactions/OptionModal';
 import CreateInvoiceModal from 'components/transactions/invoice/NewInvoiceModal';
 import FactorInvoiceModal from 'components/transactions/invoice/FactorInvoiceModal';
 import FactorInvoice from 'components/transactions/invoice/FactorInvoice';
+import PayInvoice from 'components/transactions/invoice/PayInvoice';
+import VoidInvoice from 'components/transactions/invoice/VoidInvoice';
 import { HomeIcon } from '@heroicons/react/solid'
 
 function InvoicesPage({ invoices }) {
@@ -70,12 +72,6 @@ function InvoicesPage({ invoices }) {
                                                                 scope="col"
                                                                 className="dark:text-white px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                                                             >
-                                                                DID
-                                                            </th>
-                                                            <th
-                                                                scope="col"
-                                                                className="dark:text-white px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                                                            >
                                                                 Status
                                                             </th>
                                                             <th
@@ -83,6 +79,18 @@ function InvoicesPage({ invoices }) {
                                                                 className="dark:text-white px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                                                             >
                                                                 Total
+                                                            </th>
+                                                            <th
+                                                                scope="col"
+                                                                className="dark:text-white px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                                            >
+
+                                                            </th>
+                                                            <th
+                                                                scope="col"
+                                                                className="dark:text-white px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                                            >
+
                                                             </th>
                                                             <th
                                                                 scope="col"
@@ -99,6 +107,8 @@ function InvoicesPage({ invoices }) {
                                                                 <td class="dark:text-white dark:bg-slate-900 px-5 py-5 border-b border-gray-200 bg-white text-base"><p class="dark:text-slate-900 px-2 mt-1 truncate inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">{invoice.state}</p></td>
                                                                 <td class="dark:text-white dark:bg-slate-900 px-5 py-5 border-b border-gray-200 bg-white text-base"><p class="dark:text-white text-gray-900 whitespace-no-wrap">ⓢ {invoice.amount}</p></td>
                                                                 <td><FactorInvoice id={invoice.id} /></td>
+                                                                <td><PayInvoice id={invoice.id} /></td>
+                                                                <td><VoidInvoice id={invoice.id} /></td>
                                                             </tr>
                                                         ))}
                                                     </tbody>
