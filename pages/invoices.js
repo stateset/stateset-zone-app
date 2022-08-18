@@ -49,34 +49,32 @@ function InvoicesPage({ invoices }) {
                                 </h2>
 
                                 <div class="max-w-5xl mx-auto">
-
                                     <CreateInvoiceModal />
-                                    <OptionModal />
                                 </div>
 
                                 <div className="mx-auto max-w-5xl dark:bg-slate-900 flex flex-col">
 
                                     <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                                         <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                                            <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                                                <table className="mt-2 min-w-full divide-y divide-gray-200">
-                                                    <thead className="dark:bg-slate-900 bg-gray-50">
+                                            <div className="-mx-4 mt-10 ring-1 ring-gray-300 sm:-mx-6 md:mx-0 md:rounded">
+                                                <table className="min-w-full divide-y divide-gray-300">
+                                                    <thead className="dark:bg-slate-900 bg-white">
                                                         <tr>
                                                             <th
                                                                 scope="col"
-                                                                className="dark:text-white px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                                                className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
                                                             >
                                                                 DID
                                                             </th>
                                                             <th
                                                                 scope="col"
-                                                                className="dark:text-white px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                                                className="hidden py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:table-cell"
                                                             >
                                                                 Status
                                                             </th>
                                                             <th
                                                                 scope="col"
-                                                                className="dark:text-white px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                                                className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
                                                             >
                                                                 Total
                                                             </th>
@@ -103,9 +101,11 @@ function InvoicesPage({ invoices }) {
                                                     <tbody className="dark:text-white dark:bg-slate-900 bg-white divide-y divide-gray-200">
                                                         {invoices.map((invoice) => (
                                                             <tr key={invoice.id}>
-                                                                <td className="px-6 py-4 whitespace-nowrap text-base font-medium text-gray-900"><Link href='invoice/[id]' as={`invoice/${invoice.id}`}><a>{invoice.did}</a></Link></td>
-                                                                <td class="dark:text-white dark:bg-slate-900 px-5 py-5 border-b border-gray-200 bg-white text-base"><p class="dark:text-slate-900 px-2 mt-1 truncate inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">{invoice.state}</p></td>
-                                                                <td class="dark:text-white dark:bg-slate-900 px-5 py-5 border-b border-gray-200 bg-white text-base"><p class="dark:text-white text-gray-900 whitespace-no-wrap">ⓢ {invoice.amount}</p></td>
+                                                                <td className="px-3 py-3.5 text-sm text-gray-500 lg:table-cell"><Link href='invoice/[id]' as={`invoice/${invoice.id}`}><a>{invoice.did}</a></Link>
+                                                                <div className="text-xs text-gray-500">seller: {invoice.seller}</div>
+                                                                </td>
+                                                                <td class="hidden dark:text-white dark:bg-slate-900 px-5 py-5 border-b border-gray-200 bg-white text-base lg:table-cell"><p class="dark:text-slate-900 px-2 mt-1 truncate inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">{invoice.state}</p></td>
+                                                                <td class="dark:text-white dark:bg-slate-900 px-5 py-5 border-b border-gray-200 bg-white text-base"><p class="px-3 py-3.5 text-sm text-gray-500 lg:table-cell">ⓢ {invoice.amount}</p></td>
                                                                 <td><FactorInvoice id={invoice.id} /></td>
                                                                 <td><PayInvoice id={invoice.id} /></td>
                                                                 <td><VoidInvoice id={invoice.id} /></td>

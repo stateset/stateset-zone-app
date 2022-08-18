@@ -64,8 +64,8 @@ function PurchaseOrderRecordPage({ purchase_order }) {
 <nav className="flex" aria-label="Breadcrumb">
                             <ol className="flex items-center space-x-4">
                                 <li>
-                                    <div>
-                                        <a href="/dashboard" className="text-gray-400  hover:text-gray-500 dark:text-white">
+                                <div>
+                                        <a href="/home" className="text-gray-400  hover:text-gray-500 dark:text-white">
                                             <HomeIcon className="flex-shrink-0 h-5 w-5" aria-hidden="true" />
                                             <span className="sr-only">Home</span>
                                         </a>
