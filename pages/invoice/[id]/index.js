@@ -21,11 +21,14 @@ const textVariants = {
 };
 
 
-function PurchaseOrderRecordPage({ purchase_order }) {
+function InvoiceRecordPage({ invoice }) {
+
+
+console.log(invoice);
 
   const pages = [
-      { name: `Purchase Orders`, href: '/purchaseorders', current: false },
-      { name: `Purchase Order - ${purchase_order.did}`, href: `/purchaseorder/${purchase_order.did}`, current: true },
+      { name: `Invoices`, href: '/invoices', current: false },
+      { name: `Invoice - ${invoice.did}`, href: `/invoice/${invoice.did}`, current: true },
   ]
 
   let did;
@@ -55,7 +58,7 @@ function PurchaseOrderRecordPage({ purchase_order }) {
 
   <div class="">
     <Head>
-      <title>Purchase Order - Stateset</title>
+      <title>Invoice - Stateset</title>
     </Head>
     <OnboardingBar />
     <div class="flex overflow-hidden bg-white dark:bg-slate-900">
@@ -85,7 +88,7 @@ function PurchaseOrderRecordPage({ purchase_order }) {
                                             </svg>
                                             <a
                                                 href={page.href}
-                                                className="ml-4 text-base font-medium text-gray-500 dark:text-white dark:text-white hover:text-gray-700"
+                                                className="ml-4 text-base font-medium text-gray-500 dark:text-white hover:text-gray-700"
                                                 aria-current={page.current ? 'page' : undefined}
                                             >
                                                 {page.name}
@@ -100,18 +103,14 @@ function PurchaseOrderRecordPage({ purchase_order }) {
   <div class="lg:flex lg:items-center lg:justify-between">
   <div class="flex-1 min-w-0 mt-8" >
     <h2 class="text-2xl font-bold leading-7 dark:text-white text-gray-900 sm:text-3xl sm:truncate">
-      Purchase Order - {purchase_order.did}
+      Invoice - {invoice.did}
     </h2>
     <div class="mt-1 flex flex-col sm:flex-row sm:flex-wrap sm:mt-0 sm:space-x-6">
       <div class="mt-2 flex items-center text-base text-gray-500 dark:text-white">
-        <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-          <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
-        </svg>
-        US
+        
       </div>
       <div class="mt-2 flex items-center text-base text-gray-500 dark:text-white">
-       
-        ⓢ {purchase_order.amount}
+        ⓢ {invoice.amount}
       </div>
       <div class="mt-2 flex items-center text-base text-gray-500 dark:text-white">
         <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -146,7 +145,7 @@ function PurchaseOrderRecordPage({ purchase_order }) {
       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
   <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
 </svg>
-        Finance
+        Factor
       </button>
     </span>
 
@@ -168,25 +167,25 @@ function PurchaseOrderRecordPage({ purchase_order }) {
 <div class="bg-white dark:bg-slate-900 shadow overflow-hidden sm:rounded-lg mt-8">
   <div class="px-4 py-5 sm:px-6">
     <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-white">
-      Purchase Order Information
+      Invoice Information
     </h3>
     <p class="mt-1 max-w-2xl text-base text-gray-500 dark:text-white">
-      Purchase Order details and attachments.
+      Invoice details and attachments.
     </p>
   </div>
   <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
     <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
       <div class="sm:col-span-1">
         <dt class="text-base font-medium text-gray-500 dark:text-white">
-          Purchase Order Name
+          Invoice Name
         </dt>
         <dd class="mt-1 text-base text-gray-900 dark:text-white">
-        {purchase_order.did}
+        {invoice.did}
         </dd>
       </div>
       <div class="sm:col-span-1">
         <dt class="text-base font-medium text-gray-500 dark:text-white">
-        Purchase Order for
+        Invoice for
         </dt>
         <dd class="mt-1 text-base text-gray-900 dark:text-white">
           Widgets
@@ -202,18 +201,18 @@ function PurchaseOrderRecordPage({ purchase_order }) {
       </div>
       <div class="sm:col-span-1">
         <dt class="text-base font-medium text-gray-500 dark:text-white">
-          Purchase Order Total Amount
+          Invoice Total Amount
         </dt>
         <dd class="mt-1 text-base text-gray-900 dark:text-white">
-        ⓢ {purchase_order.amount}
+        ⓢ {invoice.amount}
         </dd>
       </div>
       <div class="sm:col-span-1">
         <dt class="text-base font-medium text-gray-500 dark:text-white">
-          Purchase Order State
+          Invoice State
         </dt>
         <dd class="px-2 mt-1 truncate inline-flex  leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-         {purchase_order.state}
+         {invoice.state}
         </dd>
       </div>
       <div class="sm:col-span-1">
@@ -244,7 +243,7 @@ function PurchaseOrderRecordPage({ purchase_order }) {
                   <path fill-rule="evenodd" d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z" clip-rule="evenodd" />
                 </svg>
                 <span class="dark:text-white ml-2 flex-1 w-0 truncate">
-                  purchaseorder-213321231.pdf
+                  invoice-{invoice.did}.pdf
                 </span>
               </div>
               <div class="ml-4 flex-shrink-0">
@@ -260,7 +259,7 @@ function PurchaseOrderRecordPage({ purchase_order }) {
                   <path fill-rule="evenodd" d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z" clip-rule="evenodd" />
                 </svg>
                 <span class="dark:text-white ml-2 flex-1 w-0 truncate">
-                  purchaseorder-21343123231.pdf
+                  invoice-{invoice.did}.pdf
                 </span>
               </div>
               <div class="ml-4 flex-shrink-0">
@@ -283,28 +282,28 @@ function PurchaseOrderRecordPage({ purchase_order }) {
 </div>
 )}
 
-const PurchaseOrders = () => {
+const Invoices = () => {
 
     const router = useRouter();
     const id = router.query;
     var id_ = id.id;
-  
-    const [purchaseorders, setPurchaseOrders] = useState([]);
+
+    const [invoices, setInvoices] = useState([]);
 
     useEffect(() => {
-        async function getPurchaseOrders() {
-            const res = await fetch(`https://rest-api.stateset.zone/stateset/core/purchaseorder/purchaseorder/${id_}`, {
+        async function getInvoices() {
+            const res = await fetch(`https://rest-api.stateset.zone/stateset/core/invoice/invoice/${id_}`, {
                 method: 'GET'
             });
-            const purchaseorder_data = await res.json();
-            setPurchaseOrders(purchaseorder_data.Purchaseorder);
+            const invoice_data = await res.json();
+            setInvoices(invoice_data.Invoice);
         };
 
-        getPurchaseOrders();
+        getInvoices();
     }, []);
 
-    return (<PurchaseOrderRecordPage purchase_order={purchaseorders} />);
+    return (<InvoiceRecordPage invoice={invoices} />);
 
 }
 
-export default PurchaseOrders
+export default Invoices

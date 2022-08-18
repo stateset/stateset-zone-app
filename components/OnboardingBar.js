@@ -1,8 +1,42 @@
-import { Fragment } from 'react'
+import { Fragment, useEffect } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
+import { Secp256k1HdWallet } from "@cosmjs/amino";
+import { DirectSecp256k1HdWallet, Registry } from "@cosmjs/proto-signing";
+import { stringToPath } from "@cosmjs/crypto";
+import { assertIsBroadcastTxSuccess, SigningStargateClient, StargateClient, defaultRegistryTypes as defaultStargateTypes } from "@cosmjs/stargate";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 
+var password = '';
+if (process.browser) {
+    password = localStorage.getItem("mnemonic")
+};
+
 export default function OnboardingBar() {
+
+  var height;
+
+  useEffect(() => {
+    // Update the document title using the browser API
+    async function loadWallet(password) {
+        if (password) {
+            const my_wallet = await DirectSecp256k1HdWallet.fromMnemonic(
+                password,
+                { prefix: "stateset" },
+            );
+
+            const stateset_rpcEndpoint = "https://rpc.stateset.zone";
+
+            const my_client = await SigningStargateClient.connectWithSigner(stateset_rpcEndpoint, my_wallet, { gasPrice: "0.025state" });
+            height = await my_client.getHeight();
+
+            console.log("stateset blockchain height: ", height);
+        }
+    }
+
+    loadWallet();
+},
+
+    []);
 
   return (
     <>
@@ -20,9 +54,10 @@ export default function OnboardingBar() {
                   </dd>
                 </div>
                 <div className="pt-4 pb-3 border-t border-blue-800">
-                <div className="px-2 space-y-1 z-auto">
+                <div className="px-2 mr-2 space-y-1 z-auto">
                     <UserButton userProfileURL="/user" afterSignOutAll="/" afterSignOutOneUrl="/" />
                 </div>
+                <p className='text-white'>{height}</p>
               </div>
               </div>
             </div>

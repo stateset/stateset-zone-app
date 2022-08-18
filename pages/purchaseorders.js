@@ -74,7 +74,7 @@ function PurchaseOrdersPage({ purchase_orders }) {
                                                     <tbody className="dark:text-white dark:bg-slate-900 bg-white divide-y divide-gray-200">
                                                         {purchase_orders.map((purchase_order) => (
                                                             <tr key={purchase_order.linearId}>
-                                                                <td className="px-6 py-4 whitespace-nowrap text-base font-medium text-gray-900"><a href={purchase_order.did} class="dark:text-white">{purchase_order.did}</a></td>
+                                                                <td className="px-6 py-4 whitespace-nowrap text-base font-medium text-gray-900"><Link href='purchaseorder/[id]' as={`purchaseorder/${purchase_order.id}`}><a>{purchase_order.did}</a></Link></td>
                                                                 <td class="dark:text-white dark:bg-slate-900 px-5 py-5 border-b border-gray-200 bg-white text-base"><p class="dark:text-slate-900 px-2 mt-1 truncate inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">{purchase_order.state}</p></td>
                                                                 <td class="dark:text-white dark:bg-slate-900 px-5 py-5 border-b border-gray-200 bg-white text-base"><p class="dark:text-white text-gray-900 whitespace-no-wrap">ⓢ {purchase_order.amount}</p></td>
                                                             </tr>
@@ -105,7 +105,7 @@ const PurchaseOrders = () => {
                 method: 'GET'
             });
             const purchaseorder_data = await res.json();
-            setPurchaseOrders(purchaseorder_data.Purchaseorder);
+            setPurchaseOrders(purchaseorder_data.Purchaseorder.reverse());
         };
 
         getPurchaseOrders();

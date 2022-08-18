@@ -82,7 +82,7 @@ function InvoicesPage({ invoices }) {
                                                     <tbody className="dark:text-white dark:bg-slate-900 bg-white divide-y divide-gray-200">
                                                         {invoices.map((invoice) => (
                                                             <tr key={invoice.id}>
-                                                                <td className="px-6 py-4 whitespace-nowrap text-base font-medium text-gray-900"><a href={invoice.did} class="dark:text-white">{invoice.did}</a></td>
+                                                                <td className="px-6 py-4 whitespace-nowrap text-base font-medium text-gray-900"><Link href='invoice/[id]' as={`invoice/${invoice.id}`}><a>{invoice.did}</a></Link></td>
                                                                 <td class="dark:text-white dark:bg-slate-900 px-5 py-5 border-b border-gray-200 bg-white text-base"><p class="dark:text-slate-900 px-2 mt-1 truncate inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">{invoice.state}</p></td>
                                                                 <td class="dark:text-white dark:bg-slate-900 px-5 py-5 border-b border-gray-200 bg-white text-base"><p class="dark:text-white text-gray-900 whitespace-no-wrap">ⓢ {invoice.amount}</p></td>
                                                                 <td><FactorInvoice id={invoice.id} /></td>
@@ -114,7 +114,7 @@ const Invoices = () => {
                 method: 'GET'
             });
             const invoice_data = await res.json();
-            setInvoices(invoice_data.Invoice);
+            setInvoices(invoice_data.Invoice.reverse());
         };
 
         getInvoices();

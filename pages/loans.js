@@ -145,7 +145,7 @@ const Loans = () => {
                 method: 'GET'
             });
             const loan_data = await res.json();
-            setLoans(loan_data.Loan);
+            setLoans(loan_data.Loan.reverse());
         };
 
         getLoans();
