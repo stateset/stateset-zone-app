@@ -4,6 +4,9 @@ import OnboardingBar from 'components/OnboardingBar';
 import CreatePurchaseOrderModal from 'components/transactions/purchaseorder/NewPOModal';
 import OptionModal from 'components/transactions/OptionModal';
 import { HomeIcon } from '@heroicons/react/solid'
+import FinancePurchaseOrder from 'components/transactions/purchaseorder/FinancePurchaseOrder';
+import CompletePurchaseOrder from 'components/transactions/purchaseorder/CompletePurchaseOrder';
+import CancelPurchaseOrder from 'components/transactions/purchaseorder/CancelPurchaseOrder';
 
 
 function PurchaseOrdersPage({ purchase_orders }) {
@@ -41,17 +44,17 @@ function PurchaseOrdersPage({ purchase_orders }) {
                             </div>
                             <body class="bg-white dark:bg-slate-900 antialiased font-sans">
 
-                                <h2 class="dark:text-white mx-auto  max-w-5xl mt-8 px-4 text-2xl leading-6 font-medium text-gray-900 sm:px-6 sm:mt-8 lg:px-4 mb-8">
+                                <h2 class="dark:text-white mx-auto  max-w-6xl mt-8 px-4 text-2xl leading-6 font-medium text-gray-900 sm:px-6 sm:mt-8 lg:px-4 mb-8">
                                     Purchase Orders
                                 </h2>
 
-                                <div class="max-w-5xl mx-auto">
+                                <div class="max-w-6xl mx-auto">
                                     <CreatePurchaseOrderModal />
 
                                     <OptionModal />
                                 </div>
 
-                                <div className="mx-auto max-w-5xl dark:bg-slate-900 flex flex-col">
+                                <div className="mx-auto max-w-6xl dark:bg-slate-900 flex flex-col">
 
                                     <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                                         <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -77,14 +80,35 @@ function PurchaseOrdersPage({ purchase_orders }) {
                                                             >
                                                                 Total
                                                             </th>
+                                                            <th
+                                                                scope="col"
+                                                                className="dark:text-white px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                                            >
+                                                                
+                                                            </th>
+                                                            <th
+                                                                scope="col"
+                                                                className="dark:text-white px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                                            >
+                                                                
+                                                            </th>
+                                                            <th
+                                                                scope="col"
+                                                                className="dark:text-white px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                                            >
+                                                                
+                                                            </th>
                                                         </tr>
                                                     </thead>
                                                     <tbody className="dark:text-white dark:bg-slate-900 bg-white divide-y divide-gray-200">
                                                         {purchase_orders.map((purchase_order) => (
                                                             <tr key={purchase_order.linearId}>
-                                                                <td className="px-6 py-4 whitespace-nowrap text-base font-medium text-gray-900"><Link href='purchaseorder/[id]' as={`purchaseorder/${purchase_order.id}`}><a>{purchase_order.did}</a></Link></td>
+                                                                <td className="px-6 py-4 whitespace-nowrap text-base w-32 font-medium text-gray-900"><Link href='purchaseorder/[id]' as={`purchaseorder/${purchase_order.id}`}><a>{purchase_order.did}</a></Link></td>
                                                                 <td class="dark:text-white dark:bg-slate-900 px-5 py-5 border-b border-gray-200 bg-white text-base"><p class="dark:text-slate-900 px-2 mt-1 truncate inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">{purchase_order.state}</p></td>
                                                                 <td class="dark:text-white dark:bg-slate-900 px-5 py-5 border-b border-gray-200 bg-white text-base"><p class="dark:text-white text-gray-900 whitespace-no-wrap">ⓢ {purchase_order.amount}</p></td>
+                                                                <td><FinancePurchaseOrder id={purchase_order.id} /></td>
+                                                                <td><CompletePurchaseOrder id={purchase_order.id} /></td>
+                                                                <td><CancelPurchaseOrder id={purchase_order.id} /></td>
                                                             </tr>
                                                         ))}
                                                     </tbody>
