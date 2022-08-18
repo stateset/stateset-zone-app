@@ -9,10 +9,24 @@ import LiquidateLoan from 'components/transactions/LiquidateLoan';
 
 function LoansPage({ loans }) {
 
+    var borrower
+    var lender;
+    var borrower_string;
+    var lender_string;
+
+    loans.forEach(loan => {
+        borrower = loan.borrower;
+        lender = loan.lender;
+        borrower_string = borrower.substring(0, 16);
+        lender_string = lender.substring(0, 16);
+    });
+
+
+
     return (
 
 
-        <div class="dark">
+        <div class="">
             <OnboardingBar />
             <div class="h-screen flex overflow-hidden dark:bg-slate-900 bg-white">
                 <div class="flex flex-col w-0 flex-1 overflow-hidden">
@@ -30,8 +44,6 @@ function LoansPage({ loans }) {
 
                                             <a href="/purchaseorders" class="dark:text-white text-gray-500 px-3 py-2 font-medium text-sm rounded-md" aria-current="page"> Purchase Orders </a>
 
-                                            <a href="/commerce" class="dark:text-white text-gray-500 hover:text-gray-700 px-3 py-2 font-medium text-sm rounded-md"> Commerce</a>
-
                                         </nav>
                                     </div>
                                 </div>
@@ -43,7 +55,7 @@ function LoansPage({ loans }) {
                                 </h2>
 
                                 <div class="max-w-5xl mx-auto">
-                                <CreateLoanModal />
+                                    <CreateLoanModal />
 
                                 </div>
 
@@ -77,7 +89,19 @@ function LoansPage({ loans }) {
                                                                 scope="col"
                                                                 className="dark:text-white px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                                                             >
-                                                               
+                                                                Borrower
+                                                            </th>
+                                                            <th
+                                                                scope="col"
+                                                                className="dark:text-white px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                                            >
+                                                                Lender
+                                                            </th>
+                                                            <th
+                                                                scope="col"
+                                                                className="dark:text-white px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                                            >
+
                                                             </th>
                                                         </tr>
                                                     </thead>
@@ -87,6 +111,8 @@ function LoansPage({ loans }) {
                                                                 <td class="dark:text-white dark:bg-slate-900 px-5 py-5 border-b border-gray-200 bg-white text-base"><p class="dark:text-white text-gray-900 whitespace-no-wrap">ⓢ {loan.amount}</p></td>
                                                                 <td class="dark:text-white dark:bg-slate-900 px-5 py-5 border-b border-gray-200 bg-white text-base"><p class="dark:text-slate-900 px-2 mt-1 truncate inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">{loan.state}</p></td>
                                                                 <td class="dark:text-white dark:bg-slate-900 px-5 py-5 border-b border-gray-200 bg-white text-base"><p class="dark:text-white text-gray-900 whitespace-no-wrap">{loan.deadline}</p></td>
+                                                                <td class="dark:text-white dark:bg-slate-900 px-5 py-5 border-b border-gray-200 bg-white text-base"><p class="dark:text-white text-gray-900 w-32 whitespace-no-wrap truncate overflow-hidden text-overflow: ellipsis">{loan.borrower}</p></td>
+                                                                <td class="dark:text-white dark:bg-slate-900 px-5 py-5 border-b border-gray-200 bg-white text-base"><p class="dark:text-white text-gray-900 w-32 whitespace-no-wrap truncate overflow-hidden text-overflow: ellipsis">{loan.lender}</p></td>
                                                                 <td><ApproveLoan id={loan.id} /></td>
                                                                 <td><CancelLoan id={loan.id} /></td>
                                                                 <td><RepayLoan id={loan.id} /></td>

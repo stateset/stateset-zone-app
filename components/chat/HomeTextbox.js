@@ -368,7 +368,6 @@ export default class HomeTextbox extends React.Component {
     const res = await fetch('/api/network/complete-purchase-order', {
       method: 'POST',
       headers: {
-        'token': this.context.token,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
@@ -385,7 +384,6 @@ export default class HomeTextbox extends React.Component {
     const res = await fetch('/api/network/cancel-purchase-order', {
       method: 'POST',
       headers: {
-        'token': this.context.token,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
@@ -402,7 +400,6 @@ export default class HomeTextbox extends React.Component {
     const res = await fetch('/api/network/finance-purchase-order', {
       method: 'POST',
       headers: {
-        'token': this.context.token,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
@@ -419,7 +416,6 @@ export default class HomeTextbox extends React.Component {
     const res = await fetch('/api/network/close-case', {
       method: 'POST',
       headers: {
-        'token': this.context.token,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
@@ -437,7 +433,6 @@ export default class HomeTextbox extends React.Component {
     const res = await fetch('/api/ai/chat', {
       method: 'POST',
       headers: {
-        'token': this.context.token,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({

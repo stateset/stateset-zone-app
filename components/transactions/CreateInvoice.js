@@ -112,7 +112,7 @@ export default () => {
                 value: {
                     creator: creator_address,
                     id: _uuid,
-                    did: "did:cosmos:1:stateset:inv:" + _uuid,
+                    did: "did:cosmos:1:stateset:invoice:" + _uuid,
                     amount: inputs.amount,
                     state: "request"
                 },

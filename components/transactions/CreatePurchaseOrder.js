@@ -14,6 +14,12 @@ const MsgRequestPurchaseorder = new Type("MsgRequestPurchaseorder")
     .add(new Field("amount", 4, "string"))
     .add(new Field("state", 5, "string"));
 
+var password = '';
+if (process.browser) {
+    password = localStorage.getItem("mnemonic")
+};
+
+
 
 export default () => {
     const [status, setStatus] = useState({
@@ -66,7 +72,7 @@ export default () => {
         })
     }
 
-    const handleOnSubmit = async() => {
+    const handleOnSubmit = async () => {
         setStatus(prevStatus => ({ ...prevStatus, submitting: true }))
 
         const myRegistry = new Registry(defaultStargateTypes);
@@ -88,7 +94,7 @@ export default () => {
         if (firstAccount) {
 
             creator_address = firstAccount[0].address;
-        
+
         }
 
         const rpcEndpoint = "https://rpc.stateset.zone";
@@ -101,7 +107,7 @@ export default () => {
                 typeUrl: "/stateset.core.purchaseorder.MsgRequestPurchaseorder",
                 value: {
                     creator: creator_address,
-                    did: "did:stateset:po:" + uuid(),
+                    did: "did:cosmos:1:stateset:purchaseorder:" + uuid(),
                     uri: inputs.uri,
                     amount: inputs.amount,
                     state: "request"

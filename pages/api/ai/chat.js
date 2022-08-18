@@ -2,9 +2,7 @@ const fetch = require('node-fetch');
 
 import { withAuth } from '@clerk/nextjs/api';
 
-export default withAuth((req, res) => {
-
-  if (req.auth.sessionId) {
+export default ((req, res) => {
 
     var response = '';
     var PROMPT = `The following is a conversation with an OpenAI agent. The agent is intelligent, creative, clever, and very friendly.
@@ -20,7 +18,7 @@ export default withAuth((req, res) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': proces.env.OPEN_AI
+        'Authorization': process.env.OPEN_AI
       },
       body: raw,
       redirect: 'follow'
@@ -35,9 +33,5 @@ export default withAuth((req, res) => {
       console.error(error);
       return res.status(500).send('An error occurred');
     })
-
-  } else {
-    res.status(401).json({ id: null });
-  }
 
 });

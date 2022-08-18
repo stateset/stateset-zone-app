@@ -17,7 +17,7 @@ export default withAuth((req, res) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': proces.env.OPEN_AI
+        'Authorization': process.env.OPEN_AI
       },
       body: raw,
       redirect: 'follow'
@@ -32,7 +32,7 @@ export default withAuth((req, res) => {
       console.error(error);
       res.status(500).send('An error occurred');
     })
-    
+
   } else {
     res.status(401).json({ id: null });
   }

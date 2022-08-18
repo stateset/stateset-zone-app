@@ -9,7 +9,7 @@ function PurchaseOrdersPage({ purchase_orders }) {
     return (
 
 
-        <div class="dark">
+        <div class="">
             <OnboardingBar />
             <div class="h-screen flex overflow-hidden dark:bg-slate-900 bg-white">
                 <div class="flex flex-col w-0 flex-1 overflow-hidden">
@@ -23,9 +23,9 @@ function PurchaseOrdersPage({ purchase_orders }) {
 
                                             <a href="/invoices" class="dark:text-white text-gray-500 px-3 py-2 font-medium text-sm rounded-md" aria-current="page"> Invoices </a>
 
-                                            <a href="/purchaseorders" class="dark:text-white underline text-gray-500 px-3 py-2 font-medium text-sm rounded-md" aria-current="page"> Purchase Orders </a>
+                                            <a href="/loans" class="dark:text-white text-gray-500 px-3 py-2 font-medium text-sm rounded-md" aria-current="page"> Loans </a>
 
-                                            <a href="/commerce" class="dark:text-white text-gray-500 hover:text-gray-700 px-3 py-2 font-medium text-sm rounded-md"> Commerce</a>
+                                            <a href="/purchaseorders" class="dark:text-white underline text-gray-500 px-3 py-2 font-medium text-sm rounded-md" aria-current="page"> Purchase Orders </a>
 
                                         </nav>
                                     </div>
@@ -33,17 +33,17 @@ function PurchaseOrdersPage({ purchase_orders }) {
                             </div>
                             <body class="bg-white dark:bg-slate-900 antialiased font-sans">
 
-                                <h2 class="dark:text-white mx-auto  max-w-3xl mt-8 px-4 text-2xl leading-6 font-medium text-gray-900 sm:px-6 sm:mt-8 lg:px-4 mb-8">
+                                <h2 class="dark:text-white mx-auto  max-w-5xl mt-8 px-4 text-2xl leading-6 font-medium text-gray-900 sm:px-6 sm:mt-8 lg:px-4 mb-8">
                                     Purchase Orders
                                 </h2>
 
-                                <div class="max-w-3xl mx-auto">
+                                <div class="max-w-5xl mx-auto">
                                 <CreatePurchaseOrderModal />
 
                                 <OptionModal />
                                 </div>
 
-                                <div className="mx-auto max-w-3xl dark:bg-slate-900 flex flex-col">
+                                <div className="mx-auto max-w-5xl dark:bg-slate-900 flex flex-col">
 
                                     <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                                         <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">

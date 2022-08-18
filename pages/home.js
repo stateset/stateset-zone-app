@@ -52,7 +52,7 @@ const Home = () => {
     const { user } = useUser();
 
     return (
-        <div class="dark">
+        <div class="">
             <Head>
                 <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.3.2/build/styles/night-owl.min.css" />
             </Head>

@@ -36,7 +36,7 @@ const handleShare = async e => {
 
 
 const SendTransactionPage = () => (
-    <div class="dark">
+    <div class="">
         <Head>
             <title>Stateset Zone App</title>
             <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
@@ -53,11 +53,13 @@ const SendTransactionPage = () => (
                             <div>
                                     <div class="sm:block">
                                         <nav class="ml-8 flex space-x-5" aria-label="Tabs">
-                                            <a href="/" class="dark:text-white text-gray-500 hover:text-gray-700 px-3 py-2 font-medium text-sm rounded-md">Wallet </a>
+
+                                            <a href="/invoices" class="dark:text-white text-gray-500 px-3 py-2 font-medium text-sm rounded-md" aria-current="page"> Invoices</a>
+
+                                            <a href="/loans" class="dark:text-white text-gray-500 px-3 py-2 font-medium text-sm rounded-md" aria-current="page"> Loans </a>
 
                                             <a href="/purchaseorders" class="dark:text-white text-gray-500 px-3 py-2 font-medium text-sm rounded-md" aria-current="page"> Purchase Orders </a>
 
-                                            <a href="/commerce" class="dark:text-white text-gray-500 hover:text-gray-700 px-3 py-2 font-medium text-sm rounded-md"> Commerce</a>
 
                                         </nav>
                                     </div>
