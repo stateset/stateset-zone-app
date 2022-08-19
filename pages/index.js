@@ -54,6 +54,8 @@ const SendTransactionPage = () => (
                                     <div class="sm:block">
                                         <nav class="ml-8 flex space-x-5" aria-label="Tabs">
 
+                                            
+
                                             <a href="/invoices" class="dark:text-white text-gray-500 px-3 py-2 font-medium text-sm rounded-md" aria-current="page"> Invoices</a>
 
                                             <a href="/loans" class="dark:text-white text-gray-500 px-3 py-2 font-medium text-sm rounded-md" aria-current="page"> Loans </a>
