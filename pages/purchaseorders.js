@@ -58,43 +58,43 @@ function PurchaseOrdersPage({ purchase_orders }) {
 
                                     <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                                         <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                                            <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                                            <div className="-mx-4 mt-10 ring-1 ring-gray-300 sm:-mx-6 md:mx-0 md:rounded">
                                                 <table className="mt-2 min-w-full divide-y divide-gray-200">
-                                                    <thead className="dark:bg-slate-900 bg-gray-50">
+                                                    <thead className="dark:bg-slate-900 bg-white">
                                                         <tr>
                                                             <th
                                                                 scope="col"
-                                                                className="dark:text-white px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                                                className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
                                                             >
                                                                 DID
                                                             </th>
                                                             <th
                                                                 scope="col"
-                                                                className="dark:text-white px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                                                className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
                                                             >
                                                                 Status
                                                             </th>
                                                             <th
                                                                 scope="col"
-                                                                className="dark:text-white px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                                                className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
                                                             >
                                                                 Total
                                                             </th>
                                                             <th
                                                                 scope="col"
-                                                                className="dark:text-white px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                                                className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
                                                             >
                                                                 
                                                             </th>
                                                             <th
                                                                 scope="col"
-                                                                className="dark:text-white px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                                                className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
                                                             >
                                                                 
                                                             </th>
                                                             <th
                                                                 scope="col"
-                                                                className="dark:text-white px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                                                className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
                                                             >
                                                                 
                                                             </th>
