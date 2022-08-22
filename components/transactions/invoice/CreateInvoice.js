@@ -3,6 +3,7 @@ import { stringToPath } from "@cosmjs/crypto";
 import { assertIsBroadcastTxSuccess, SigningStargateClient, StargateClient, defaultRegistryTypes as defaultStargateTypes } from "@cosmjs/stargate";
 import React, { useState, Fragment, useEffect } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
+import algoliasearch from 'algoliasearch/lite';
 
 const client = algoliasearch(process.env.NEXT_PUBLIC_SEARCH_ID, process.env.NEXT_PUBLIC_SEARCH_KEY);
 const index = client.initIndex('prod_STATESET_ZONE_INVOICES');
