@@ -5,6 +5,7 @@ import { DirectSecp256k1HdWallet, Registry } from "@cosmjs/proto-signing";
 import { stringToPath } from "@cosmjs/crypto";
 import { assertIsBroadcastTxSuccess, SigningStargateClient, StargateClient, defaultRegistryTypes as defaultStargateTypes } from "@cosmjs/stargate";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import Search from 'components/search'
 
 var password = '';
 if (process.browser) {
@@ -52,6 +53,11 @@ export default function OnboardingBar() {
                   </div>
                   <dd className="mt-0 ml-2">
                   </dd>
+                </div>
+                <div className="flex-1 flex justify-center lg:justify-end">
+                  <div className="w-full px-2 lg:px-6">
+                    <Search indexName="prod_STATESET_ZONE_INVOICES" />
+                  </div>
                 </div>
                 <div className="pt-4 pb-3 border-t border-blue-800">
                 <div className="px-2 mr-2 space-y-1 z-auto">
