@@ -4,6 +4,9 @@ import { assertIsBroadcastTxSuccess, SigningStargateClient, StargateClient, defa
 import React, { useState, Fragment, useEffect } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 
+const client = algoliasearch(process.env.NEXT_PUBLIC_SEARCH_ID, process.env.NEXT_PUBLIC_SEARCH_KEY);
+const index = client.initIndex('prod_STATESET_ZONE_INVOICES');
+
 import { Type, Field } from "protobufjs";
 import { uuid } from "uuidv4";
 
@@ -138,8 +141,19 @@ export default () => {
 
             console.log(result_data)
             if (result_data) {
+
+                // Save to the Search Index
+                index.saveObject({
+                    objectID: _uuid,
+                    did: "did:cosmos:1:stateset:invoice:" + _uuid,
+                    amount: inputs.amount,
+                    state: "request",
+                    seller: creator_address,
+                    purchaser: inputs.recipient
+                });
+
                 setConfirm(true);
-            } else if (result_data.result.code = 5) {
+            } else if (result) {
                 setError(true);
                 setMessage(result_data.result.code.log)
             } else {
@@ -258,7 +272,7 @@ export default () => {
                         </div>
                     </div>
                 </div>
-                <button onClick={handleOnSubmit} type="button" class="mt-8 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                <button onClick={handleOnSubmit} type="button" class="mt-8 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500g:table-cell">
                     Upload Invoice
                 </button>
                 <br />
