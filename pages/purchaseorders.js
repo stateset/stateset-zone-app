@@ -7,7 +7,7 @@ import { HomeIcon } from '@heroicons/react/solid'
 import FinancePurchaseOrder from 'components/transactions/purchaseorder/FinancePurchaseOrder';
 import CompletePurchaseOrder from 'components/transactions/purchaseorder/CompletePurchaseOrder';
 import CancelPurchaseOrder from 'components/transactions/purchaseorder/CancelPurchaseOrder';
-
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 function PurchaseOrdersPage({ purchase_orders }) {
 
@@ -103,7 +103,13 @@ function PurchaseOrdersPage({ purchase_orders }) {
                                                     <tbody className="dark:text-white dark:bg-slate-900 bg-white divide-y divide-gray-200">
                                                         {purchase_orders.map((purchase_order) => (
                                                             <tr key={purchase_order.linearId}>
-                                                                <td className="px-3 py-3.5 text-sm text-gray-500 whitespace-nowrap w-32"><Link href='purchaseorder/[id]' as={`purchaseorder/${purchase_order.id}`}><a>{purchase_order.did}</a></Link></td>
+                                                                <td className="px-3 py-3.5 text-sm text-stateset-copy whitespace-nowrap w-32"><Link href='purchaseorder/[id]' as={`purchaseorder/${purchase_order.id}`}><a>{purchase_order.did}</a></Link>
+                                                                <CopyToClipboard text={purchase_order.did}>
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mb-1 w-4 h-4 inline-flex text-gray-400 active:bg-gray-200 active:text-gray-500 rounded">
+                                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" />
+                                                                        </svg>
+                                                                </CopyToClipboard>
+                                                                </td>
                                                                 <td class="dark:text-white dark:bg-slate-900 px-5 py-5 border-b border-gray-200 bg-white text-base"><p class="dark:text-slate-900 px-2 mt-1 truncate inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">{purchase_order.state}</p></td>
                                                                 <td class="dark:text-white dark:bg-slate-900 px-5 py-5 border-b border-gray-200 bg-white text-base"><p class="dark:text-white px-3 py-3.5 text-sm text-gray-500 whitespace-no-wrap">ⓢ {purchase_order.amount}</p></td>
                                                                 <td><FinancePurchaseOrder id={purchase_order.id} /></td>
