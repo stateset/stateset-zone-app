@@ -7,6 +7,11 @@ import { Dialog, Transition } from '@headlessui/react'
 import { Type, Field } from "protobufjs";
 import { uuid } from "uuidv4";
 
+import algoliasearch from 'algoliasearch/lite';
+
+const client = algoliasearch(process.env.NEXT_PUBLIC_SEARCH_ID, process.env.NEXT_PUBLIC_SEARCH_KEY);
+const index = client.initIndex('prod_STATESET_ZONE_LOANS');
+
 const MsgRequestLoan = new Type("MsgRequestLoan")
     .add(new Field("creator", 1, "string"))
     .add(new Field("amount", 2, "string"))
@@ -142,6 +147,17 @@ export default () => {
             console.log(result)
             if (result) {
                 setConfirm(true);
+
+                // Save to the Search Index
+                index.saveObject({
+                    objectID: _uuid,
+                    did: "did:cosmos:1:stateset:loan:" + _uuid,
+                    amount: inputs.amount,
+                    fee: inputs.fee,
+                    collateral: collateral,
+                    deadline: inputs.deadline
+                });
+
             } else if (result.error) {
                 setError(true);
             } else {

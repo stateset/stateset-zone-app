@@ -4,6 +4,10 @@ import { assertIsBroadcastTxSuccess, SigningStargateClient, StargateClient, defa
 import React, { useState } from 'react'
 import { uuid } from "uuidv4";
 
+import algoliasearch from 'algoliasearch/lite';
+
+const client = algoliasearch(process.env.NEXT_PUBLIC_SEARCH_ID, process.env.NEXT_PUBLIC_SEARCH_KEY);
+const index = client.initIndex('prod_STATESET_ZONE_PURCHASEORDERS');
 
 import { Type, Field } from "protobufjs";
 
@@ -128,6 +132,15 @@ export default () => {
             const response = await client.signAndBroadcast(creator_address, [message], "auto", 'uploading a po request from stateset zone');
 
             console.log(response);
+
+            // Save to the Search Index
+            index.saveObject({
+                objectID: _uuid,
+                creator: creator_address,
+                did: "did:cosmos:1:stateset:purchaseorder:" + _uuid,
+                amount: inputs.amount,
+                state: "request"
+            });
         }
     }
 
