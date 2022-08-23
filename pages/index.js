@@ -81,7 +81,7 @@ const SendTransactionPage = () => (
                     </div>
                     <footer className="flex justify-center bottom-0 w-full">
                         <div className="flex justify-center mb-8">
-                            <p className="text-gray-500 mr-3"><a href="https://stateset.gitbook.io/stateset-docs/stateset-network">Docs</a></p>
+                            <p className="text-gray-500 mr-3"><a href="https://doc.stateset.io/stateset-docs/stateset-network">Docs</a></p>
                             <p className="text-gray-500 mr-3"><a href="https://rpc.stateset.zone">RPC</a></p>
                             <p className="text-gray-500 mr-3"><a href="https://app.stateset.zone/stateset.pdf">Whitepaper</a></p>
                             <p className="text-gray-500 mr-3"><a href="https://rpc.stateset.zone/genesis">Genesis</a></p>
