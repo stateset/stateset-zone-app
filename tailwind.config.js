@@ -11,7 +11,8 @@ module.exports = {
     extend: {
       colors: {
         'stateset-yellow': '#f7ca00',
-        'stateset-dark-yellow': '#e8c117'
+        'stateset-dark-yellow': '#e8c117',
+        'stateset-copy': '#3498db'
       },
     },
   },
