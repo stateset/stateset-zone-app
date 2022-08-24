@@ -83,7 +83,7 @@ const InvoiceHits = ({ hits }) => (
 
 
 const SearchBox = ({ currentRefinement, refine }) => (
-  <div className="w-full px-2 lg:px-6">
+  <div className="invisible lg:visible md:visible sm:invisible w-full px-2 lg:px-6">
     <label htmlFor="search" className="sr-only">
       Search Stateset
                 </label>
@@ -151,7 +151,7 @@ export default class extends React.Component {
         <Configure hitsPerPage={1} />
         <div class="static">
         <CustomSearchBox />
-        <div class="border-solid border-2 border-white rounded-lg px-3 bg-white absolute mt-3 ml-5 w-7/12 z-40">
+        <div class="invisible lg:visible md:visible sm:invisible border-solid border-2 border-white rounded-lg px-3 bg-white absolute mt-3 ml-5 w-7/12 z-40">
           <AllResults>
             <div>
               <Index indexName="prod_STATESET_ZONE_PURCHASEORDERS">

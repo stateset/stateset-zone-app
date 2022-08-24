@@ -17,8 +17,8 @@ export default function OnboardingBar() {
   var height;
 
   useEffect(() => {
-    // Update the document title using the browser API
     async function loadWallet(password) {
+
         if (password) {
             const my_wallet = await DirectSecp256k1HdWallet.fromMnemonic(
                 password,
@@ -51,8 +51,6 @@ export default function OnboardingBar() {
                   <div className="flex-shrink-0">
                     <img className="h-8 w-22" src="/statesetwhitelogo.svg"/>
                   </div>
-                  <dd className="mt-0 ml-2">
-                  </dd>
                 </div>
                 <div className="flex-1 flex justify-center lg:justify-end">
                   <div className="w-full px-2 lg:px-6">
@@ -63,7 +61,6 @@ export default function OnboardingBar() {
                 <div className="px-2 mr-2 space-y-1 z-auto">
                     <UserButton userProfileURL="/user" afterSignOutAll="/" afterSignOutOneUrl="/" />
                 </div>
-                <p className='text-white'>{height}</p>
               </div>
               </div>
             </div>
