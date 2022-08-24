@@ -58,7 +58,7 @@ function PurchaseOrdersPage({ purchase_orders }) {
 
                                     <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                                         <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                                            <div className="-mx-4 mt-10 ring-1 ring-gray-300 sm:-mx-6 md:mx-0 md:rounded">
+                                            <div className="-mx-2 mt-10 ring-1 ring-gray-300 sm:-mx-6 md:mx-0 md:rounded">
                                                 <table className="mt-2 min-w-full divide-y divide-gray-200">
                                                     <thead className="dark:bg-slate-900 bg-white">
                                                         <tr>
@@ -109,6 +109,8 @@ function PurchaseOrdersPage({ purchase_orders }) {
                                                                             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" />
                                                                         </svg>
                                                                 </CopyToClipboard>
+                                                                <div className="text-xs text-gray-500 w-44 whitespace-no-wrap truncate overflow-hidden text-overflow: ellipsis">purchaser: {purchase_order.purchaser}</div>
+                                                                <div className="text-xs text-gray-500 w-44 whitespace-no-wrap truncate overflow-hidden text-overflow: ellipsis">seller: {purchase_order.seller}</div>
                                                                 </td>
                                                                 <td class="dark:text-white dark:bg-slate-900 px-5 py-5 border-b border-gray-200 bg-white text-base"><p class="dark:text-slate-900 px-2 mt-1 truncate inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">{purchase_order.state}</p></td>
                                                                 <td class="dark:text-white dark:bg-slate-900 px-5 py-5 border-b border-gray-200 bg-white text-base"><p class="dark:text-white px-3 py-3.5 text-sm text-gray-500 whitespace-no-wrap">ⓢ {purchase_order.amount}</p></td>

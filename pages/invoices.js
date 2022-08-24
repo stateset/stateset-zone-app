@@ -57,7 +57,7 @@ function InvoicesPage({ invoices }) {
 
                                     <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                                         <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                                            <div className="-mx-4 mt-10 ring-1 ring-gray-300 sm:-mx-6 md:mx-0 md:rounded">
+                                            <div className="-mx-2 mt-10 ring-1 ring-gray-300 sm:-mx-6 md:mx-0 md:rounded">
                                                 <table className="min-w-full divide-y divide-gray-300">
                                                     <thead className="dark:bg-slate-900 bg-white">
                                                         <tr>
@@ -109,7 +109,8 @@ function InvoicesPage({ invoices }) {
                                                                         </svg>
 
                                                                     </CopyToClipboard>
-                                                                    <div className="text-xs text-gray-500">seller: {invoice.seller}</div>
+                                                                    <div className="text-xs text-gray-500 w-44 whitespace-no-wrap truncate overflow-hidden text-overflow: ellipsis">seller: {invoice.seller}</div>
+                                                                    <div className="text-xs text-gray-500 w-44 whitespace-no-wrap truncate overflow-hidden text-overflow: ellipsis">purchaser: {invoice.purchaser}</div>
                                                                 </td>
                                                                 <td class="hidden dark:text-white dark:bg-slate-900 px-5 py-5 border-b border-gray-200 bg-white text-base lg:table-cell"><p class="dark:text-slate-900 px-2 mt-1 truncate inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">{invoice.state}</p></td>
                                                                 <td class="dark:text-white dark:bg-slate-900 px-5 py-5 border-b border-gray-200 bg-white text-base"><p class="px-3 py-3.5 text-sm text-gray-500 lg:table-cell">ⓢ {invoice.amount}</p></td>
