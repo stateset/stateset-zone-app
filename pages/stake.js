@@ -69,7 +69,7 @@ const StakeTransactionPage = () => (
                         <div className="flex justify-center mb-8">
                             <p className="text-gray-500 mr-5"><a href="https://rest-api.stateset.zone">REST</a></p>
                             <p className="text-gray-500 mr-5"><a href="https://rpc.stateset.zone">RPC</a></p>
-                            <p className="text-gray-500 mr-5"><a href="https://github.com/stateset/core">Github</a></p>
+                            <p className="text-gray-500 mr-5"><a href="https://github.com/stateset">Github</a></p>
                             <p className="text-gray-500"><a href="https://rpc.stateset.zone/genesis">Genesis File</a></p>
                         </div>
                     </footer>

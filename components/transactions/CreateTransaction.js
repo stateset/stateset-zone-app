@@ -197,7 +197,7 @@ export default () => {
                                             Transaction successful
                                         </Dialog.Title>
                                         <div className="mt-2">
-                                            <p className="text-sm text-gray-500">
+                                            <p className="text-sm text-blue-600">
                                                 Your transaction has been sent to {inputs.recipient}
                                             </p>
                                         </div>
@@ -218,10 +218,10 @@ export default () => {
                 </Dialog>
             </Transition.Root>
             <div className="mt-2">
-                <div class="float-right pt-5 text-gray-500 sm:text-sm">
+                <div class="float-right pt-5 text-blue-600 sm:text-sm">
                     {inputs.stateset_balance} STATE
                 </div>
-                <p className="py-4 text-sm tracking-tight text-gray-500 lg:visible md:visible invisible">
+                <p className="py-4 text-sm tracking-tight text-blue-600 lg:visible md:visible invisible">
                     Send a transaction
                 </p>
             </div>
@@ -236,7 +236,7 @@ export default () => {
                 <div class="mt-2 relative rounded-md shadow-sm">
                     <input type="text" name="amount" id="amount" class="focus:ring-blue-500 focus:border-blue-500 block w-full p2-2 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="" aria-describedby="price-currency" onChange={handleOnChange} value={inputs.amount} />
                     <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                        <span class="pt-5 text-gray-500 sm:text-sm" id="price-currency">
+                        <span class="pt-5 text-blue-600 sm:text-sm" id="price-currency">
                             STATE
                         </span>
                     </div>

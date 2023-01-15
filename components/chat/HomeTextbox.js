@@ -71,8 +71,8 @@ export default class HomeTextbox extends React.Component {
 
     this.setState({
       body: command
-      })
-    };
+    })
+  };
 
   // Handle Typing
 
@@ -116,7 +116,7 @@ export default class HomeTextbox extends React.Component {
       await mutate({
         mutation: emitTypingEvent,
         variables: {
-          username: 'StatesetAI'
+          username: 'StateGPT'
         }
       });
     }
@@ -160,6 +160,24 @@ export default class HomeTextbox extends React.Component {
     createUsage();
   };
 
+  // Generate Edit
+
+  generateEdit = async (client) => {
+    const res = await fetch('/api/ai/edit', {
+      method: 'POST',
+      headers:
+      {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        "body": this.state.body,
+      })
+    });
+    const gpt_text = await res.json()
+    this.handleResponse(res.status, gpt_text.choices[0].text, client.mutate, false)
+
+  };
+
 
   // Handle Chat Response
 
@@ -177,8 +195,8 @@ export default class HomeTextbox extends React.Component {
         variables: {
           message: {
             id: uuid(),
-            username: 'StatesetAI',
-            from: 'StatesetAI',
+            username: 'StateGPT',
+            from: 'StateGPT',
             body: msg,
             time: orderTime,
             timestamp: uniTime,
@@ -301,7 +319,7 @@ export default class HomeTextbox extends React.Component {
         "body": this.state.body,
       })
     });
-    
+
     this.handleAITyping(client.mutate);
 
     const gpt_text = await res.json()
@@ -438,14 +456,82 @@ export default class HomeTextbox extends React.Component {
       body: JSON.stringify({
         "body": this.state.body
       })
-    });        
-    
+    });
+
     this.handleAITyping(client.mutate);
     const _delay = ms => new Promise(res => setTimeout(res, ms));
     await _delay(2000);
     const gpt_text = await res.json();
     this.handleResponse(res.status, gpt_text.choices[0].text, client.mutate, false);
   };
+
+
+  // Handle Chat
+
+  handleStreamChat = async (client) => {
+
+    const res = await fetch('/api/ai/chat', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        "body": this.state.body
+      })
+    });
+
+    const data = res.body;
+
+    const reader = data.getReader();
+    const decoder = new TextDecoder();
+
+    let done = false;
+    let tempState = '';
+
+    while (!done) {
+      // eslint-disable-next-line no-await-in-loop
+      const { value, done: doneReading } = await reader.read();
+      done = doneReading;
+      const newValue = decoder
+        .decode(value)
+        .replaceAll('data: ', '')
+        .split('\n\n')
+        .filter(Boolean);
+
+      if (tempState) {
+        newValue[0] = tempState + newValue[0];
+        tempState = '';
+      }
+
+      // eslint-disable-next-line @typescript-eslint/no-loop-func
+      newValue.forEach((newVal) => {
+        if (newVal === '[DONE]') {
+          return;
+        }
+
+        try {
+          const json = JSON.parse(newVal);
+
+          if (!json.choices?.length) {
+            throw new Error('Something went wrong.');
+          }
+
+          const choice = json.choices[0];
+
+          console.log(choice.text);
+
+          this.setState({ "body": ((prev) => prev + choice.text)});
+
+          console.log(this.state.body);
+
+        } catch (error) {
+          tempState = newVal;
+        }
+      });
+    }
+
+  };
+
 
   // Handle Dark Mode
   handleDarkMode = async (client, color) => {
@@ -541,7 +627,7 @@ export default class HomeTextbox extends React.Component {
           (insert_message, { data, loading, error, client }) => {
             const sendMessage = (e) => {
               e.preventDefault();
-              if (this.state.body.includes('@StatesetAI', 'StatesetAI', 'StatesetAi', 'statesetai')) {
+              if ((this.state.body) && (!this.state.body.includes('make the', 'code', '/code', 'put a', 'draw a', 'alert'))) {
                 insert_message();
                 this.handleChat(client);
                 this.setState({
@@ -555,7 +641,7 @@ export default class HomeTextbox extends React.Component {
                   toUser: name_string,
                 })
                 this.sendText();
-              } else if (this.state.body.includes('/code')) {
+              } else if (this.state.body.includes('make the', 'code', '/code', 'put a', 'draw a', 'alert')) {
                 insert_message();
                 this.handleCode(client);
                 this.setState({
@@ -619,10 +705,10 @@ export default class HomeTextbox extends React.Component {
         <div className="dark:bg-slate-900 inline-flex items-center justify-between">
           <textarea
             id="textbox"
-            className="m-2 py-2 px-3 w-96 mr-2 ml-8 rounded border dark:text-white dark:bg-slate-900 border-gray-300 bg-gray-100 resize-none"
+            className="mb-3 m-2 py-2 px-8 w-64 mr-2 ml-4 rounded-full border dark:text-white dark:bg-slate-900 border-gray-300 bg-gray-100 resize-none"
             placeholder="Type a Message..."
             value={this.state.body}
-            rows="2"
+            rows="1"
             autoFocus={false}
             onChange={(e) => {
               this.handleTyping(e.target.value, client.mutate);
@@ -633,30 +719,6 @@ export default class HomeTextbox extends React.Component {
           Send
         </button>
         <br />
-        <span className="ml-8 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800">
-          <svg className="mr-1.5 h-2 w-2 text-green-400" fill="currentColor" viewBox="0 0 8 8">
-            <circle cx={4} cy={4} r={3} />
-          </svg>
-          <a onClick={() => { this.handleQuickCommand("@StatesetAI")}}>@StatesetAI</a>
-        </span>
-        <span className="ml-1 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800">
-          <svg className="mr-1.5 h-2 w-2 text-green-400" fill="currentColor" viewBox="0 0 8 8">
-            <circle cx={4} cy={4} r={3} />
-          </svg>
-          <a onClick={() => { this.handleQuickCommand("/code")}}>/code</a>
-        </span>
-        <span className="ml-1 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800">
-          <svg className="mr-1.5 h-2 w-2 text-green-400" fill="currentColor" viewBox="0 0 8 8">
-            <circle cx={4} cy={4} r={3} />
-          </svg>
-          <a onClick={() => { this.handleQuickCommand("/answer")}}>/answer</a>
-        </span>
-        <span className="ml-1 mb-8 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800">
-          <svg className="mr-1.5 h-2 w-2 text-green-400" fill="currentColor" viewBox="0 0 8 8">
-            <circle cx={4} cy={4} r={3} />
-          </svg>
-          <a onClick={() => { this.handleQuickCommand("/edit")}}>/edit</a>
-        </span>
       </form>
     );
   }

@@ -5,7 +5,9 @@ const SignInPage = () => (
   <>
   <OnboardingBar />
   <br/>
+  <div class="grid place-content-center align-middle">
   <SignIn path="/sign-in" routing="path" signUpUrl="/sign-up" />
+  </div>
   </>
 )
 

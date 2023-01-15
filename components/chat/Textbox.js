@@ -150,8 +150,8 @@ export default class Textbox extends React.Component {
         variables: {
           message: {
             id: uuid(),
-            username: 'StatesetAI',
-            from: 'StatesetAI',
+            username: 'StateGPT',
+            from: 'StateGPT',
             body: msg,
             time: orderTime,
             timestamp: uniTime,
@@ -442,7 +442,7 @@ export default class Textbox extends React.Component {
           (insert_message, { data, loading, error, client }) => {
             const sendMessage = (e) => {
               e.preventDefault();
-              if (this.state.body.includes('@StatesetAI', 'StatesetAI', 'StatesetAi', 'statesetai')) {
+              if (this.state.body.includes('@StateGPT', 'StateGPT', 'StateGPT', 'StateGPT')) {
                 insert_message();
                 this.handleChat(client);
                 this.setState({
@@ -516,7 +516,7 @@ export default class Textbox extends React.Component {
           <svg className="mr-1.5 h-2 w-2 text-green-400" fill="currentColor" viewBox="0 0 8 8">
             <circle cx={4} cy={4} r={3} />
           </svg>
-        @StatesetAI
+        @StateGPT
       </span>
         <span className="ml-3 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800">
           <svg className="mr-1.5 h-2 w-2 text-green-400" fill="currentColor" viewBox="0 0 8 8">

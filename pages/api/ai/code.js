@@ -11,7 +11,7 @@ export default withAuth((req, res) => {
     
     `;
   
-    var raw = JSON.stringify({"prompt": PROMPT, "max_tokens": 300, "temperature": 0, "top_p": 1, "presence_penalty": 0, "frequency_penalty": 0, "logprobs": 0, "best_of": 1, "stop": ["//", "#"]});
+    var raw = JSON.stringify({"prompt": PROMPT, "max_tokens": 500, "temperature": 0, "top_p": 1, "presence_penalty": 0, "frequency_penalty": 0, "logprobs": 0, "best_of": 1 });
       
     var requestOptions = {
       method: 'POST',

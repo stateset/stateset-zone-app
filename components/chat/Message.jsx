@@ -13,7 +13,7 @@ const Message = ({ message, user }) => {
 
     // Check User
     let user_check = function (message) {
-        if (message.from == "StatesetAI" && message.isCode == true) {
+        if (message.from == "StateGPT" && message.isCode == true) {
             return <div class="flex flex-wrap"><pre class="p-4 text-xs text-white dark:bg-slate-900 bg-black rounded-lg"><code>{message.body}</code></pre><br /></div>
         } else {
             return <div class="flex flex-wrap dark:text-white"><><div>{message.body}</div><br /></></div>
@@ -34,7 +34,7 @@ const Message = ({ message, user }) => {
                             <div class="min-w-0 flex-1">
                                 <div>
                                     <div class="text-base">
-                                        <Link href='/users/[username]' as={`/users/${user.username}`}><a class="font-medium dark:text-white text-gray-900">{message.from}</a></Link>
+                                        <Link href='/users/[username]' as={`/users/${user.username}`}><a class="font-medium dark:text-white text-blue-600">{message.from}</a></Link>
                                     </div>
                                     <p class="mt-0.5 text-base text-gray-500">
                                         {time} 

@@ -1,13 +1,26 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import OnboardingBar from 'components/OnboardingBar';
+import CreateTransaction from 'components/transactions/CreateTransaction'
+import CreatePuchaseOrder from 'components/transactions/purchaseorder/CreatePurchaseOrder'
+import DelegateState from 'components/transactions/DelegateState'
+import CreateAccount from 'components/transactions/account/CreateAccount'
+import CreateVote from 'components/transactions/CreateVote'
+import CreateContract from 'components/transactions/contract/CreateContract'
+import UploadSmartContract from 'components/transactions/contract/UploadSmartContract'
+import ChatWrapper from 'components/chat/ChatWrapper';
 import { motion } from 'framer-motion';
-import OnboardingBar from 'components/OnboardingBar'
-import { useRouter } from 'next/router';
-import HomeWrapper from 'components/chat/HomeWrapper';
-import { Dialog, Transition } from '@headlessui/react'
-import { Fragment, useRef, useState, useEffect, useContext } from 'react'
-import { withUser, useUser } from '@clerk/clerk-react';
-import Link from 'next/link'
+
+let easing = [0.175, 0.85, 0.42, 0.96];
+
+const textVariants = {
+    exit: { y: 100, opacity: 0, transition: { duration: 0.5, ease: easing } },
+    enter: {
+        y: 0,
+        opacity: 1,
+        transition: { delay: 0.1, duration: 0.5, ease: easing }
+    }
+};
 
 import {
     AcademicCapIcon,
@@ -32,74 +45,54 @@ import {
     MapIcon,
     UsersIcon,
 } from '@heroicons/react/outline'
-import CreateAccount from 'components/transactions/account/CreateAccount';
-import CreateChanelThreadModal from 'components/chat/CreateChannelThreadModal';
 
-
-function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
+const handleShare = async e => {
+    if (navigator.share) {
+        navigator.share({
+            title: 'Stateset Zone',
+            text: 'Check out Stateset Zone.',
+            url: 'https://app.stateset.zone',
+        })
+            .then(() => console.log('Successful share'))
+            .catch((error) => console.log('Error sharing', error));
+    }
 }
 
-const navigation = [
-    
-]
 
-const Home = () => {
-
-    const { user } = useUser();
-
-    return (
-        <div class="light">
-            <Head>
-                <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.3.2/build/styles/night-owl.min.css" />
-            </Head>
-
-            <OnboardingBar />
-            <body class="antialiased font-sans">
-                <div className="flex-grow w-full max-w-7xl mx-auto xl:px-8 lg:flex">
-                    <div className="flex-1 min-w-0 dark:bg-slate-900 bg-white xl:flex">
-                        <div className="border-b border-gray-200 xl:border-b-0 xl:flex-shrink-0 xl:w-64 xl:border-r xl:border-gray-200 dark:bg-slate-900 bg-white">
-                            <div className="h-full pl-4 pr-6 py-6 sm:pl-6 lg:pl-8 xl:pl-0">
-                                <h2 class="text-lg dark:text-white text-blue-600 font-semibold">Welcome, {user.username}</h2>
-                                <div className="h-full relative" style={{ minHeight: '12rem' }}>
-                                    <div className="rounded-lg" />
-                                    <nav className="mt-5 flex-1">
-                                        <div className="px-2 space-y-1">
-                                            {navigation.map((item) => (
-                                                <Link href={`/${item.href}`} as={`/${item.href}`} >
-                                                    <a href={item.href} className={classNames(item.current ? 'dark:bg-slate-900 dark:text-gray-300 bg-white text-gray-900' : 'bg-white hover:bg-gray-50 hover:text-gray-900', 'group flex items-center px-2 py-2 text-sm font-medium rounded-md')} >
-                                                        <item.icon className={classNames(item.current ? 'dark:text-gray-400 text-blue-600' : 'text-gray-400 group-hover:text-blue-600', 'mr-3 h-6 w-6')} />
-                                                        {item.name}
-                                                    </a>
-                                                </Link>
-                                            ))}
+const WalletPage = () => (
+    <div class="light">
+        <Head>
+            <title>Stateset Zone App</title>
+            <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+            <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+            <link rel="icon" href="/favicon.ico" />
+        </Head>
+        <OnboardingBar />
+        <div class="justify-center flex overflow-hidden bg-white dark:bg-slate-900">
+            <div class="flex overflow-hidden">
+                <main class="flex-1 relative z-0 overflow-y-auto focus:outline-none" tabindex="0">
+                    <div class="container mx-auto py-2">
+                        <body class="antialiased font-sans">
+                            <div class="max-w-8xl mb-4 mt-3 text-lg">
+                            <div>
+                                    <div class="sm:block">
+                                    </div>
+                                </div>
+                                <div className="sm:flex sm:items-start">
+                                    <div className="mt-3 mr-3 py-4 px-4 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                                        <div className="mt-2 mb-2">
+                                            <motion.div initial="exit" animate="enter" exit="exit">
+                                                <motion.div variants={textVariants}>
+                                                    <CreateAccount />
+                                                </motion.div>
+                                            </motion.div>
                                         </div>
-                                        <br/>
-                                        <CreateChanelThreadModal />
-                                    </nav>
-                                    <div id="myCanvas"></div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
-
-                        <div className="dark:bg-slate-900 bg-white lg:min-w-0 lg:flex-1">
-                            <div className="h-full py-6 px-4 sm:px-6 lg:px-8">
-                                <div className="relative h-full" style={{ minHeight: '36rem' }}>
-                                    <div className="rounded-lg" />
-                                    <HomeWrapper />
-                                </div>
-                            </div>
-                        </div>
+                        </body>
                     </div>
-
-
-
-                    <div className="dark:bg-slate-900 bg-white pr-4 sm:pr-6 lg:pr-8 lg:flex-shrink-0 lg:border-l lg:border-gray-200 xl:pr-0">
-                        <div className="pl-6 py-6 lg:w-92">
-                            <CreateAccount />
-                        </div>
-                        <footer className="ml-2 flex justify-center bottom-0">
+                    <footer className="flex justify-center bottom-0 w-full">
                         <div className="flex justify-center mb-8">
                             <p className="text-blue-600 mr-3"><a href="https://docs.stateset.io/stateset-docs/stateset-network">Docs</a></p>
                             <p className="text-blue-600 mr-3"><a href="https://rpc.stateset.zone">RPC</a></p>
@@ -124,11 +117,12 @@ const Home = () => {
                             </a>
                             </div>
                     </footer>
-                    </div>
-                </div>
-            </body>
+                </main>
+            </div>
         </div>
-    )
-}
+        <div class="justify-center flex overflow-hidden bg-white">
+        </div>
+    </div>
+)
 
-export default withUser(Home);
+export default WalletPage

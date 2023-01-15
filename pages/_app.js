@@ -4,7 +4,6 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
 import { ApolloProvider } from 'react-apollo';
 import { WebSocketLink } from 'apollo-link-ws';
-import { SubscriptionClient } from 'subscriptions-transport-ws';
 import { split } from 'apollo-link';
 import { getMainDefinition } from 'apollo-utilities';
 import { ClerkProvider, SignedIn, SignedOut, RedirectToSignIn } from '@clerk/clerk-react'
@@ -57,7 +56,7 @@ const client = new ApolloClient({
   })
 })
 
-const publicPages = ['/', '/sign-in/[[...index]]', '/sign-up/[[...index]]', '/invoices', '/purchaseorders'];
+const publicPages = ['/', '/sign-in/[[...index]]', '/sign-up/[[...index]]', '/invoices', '/purchaseorders', '/loans'];
 
 
 function MyApp({ Component, pageProps }) {

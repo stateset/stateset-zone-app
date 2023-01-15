@@ -41,7 +41,7 @@ export default () => {
     })
 
     const stats = [
-        { name: 'Available STATE', stat: '' + inputs.state_balance },
+        { name: '', stat: '' + inputs.state_balance },
     ]
 
 
@@ -325,7 +325,7 @@ export default () => {
         console.log(firstAccount.address);
 
         const rpcEndpoint = "https://rpc.stateset.zone";
-        const client = await SigningStargateClient.connectWithSigner(rpcEndpoint, wallet, { gasPrice: "0.025state" });
+        const client = await SigningStargateClient.connectWithSigner(rpcEndpoint, wallet, { gasPrice: "0.0025state" });
 
         const recipient = inputs.recipient;
         const amount = {
@@ -394,15 +394,15 @@ export default () => {
                                             </svg>
                                         </div>
                                         <div class="ml-3 w-0 flex-1 pt-0.5">
-                                            <p class="text-sm font-medium text-gray-900">
+                                            <p class="text-sm font-medium text-blue-600">
                                                 Transaction Success
                                             </p>
-                                            <p class="mt-1 text-xs text-gray-500">
+                                            <p class="mt-1 text-xs text-blue-600">
                                                 Sent {inputs.amount} STATE to {inputs.recipient}. Anyone with a link can now view this transaction.
                                             </p>
                                         </div>
                                         <div class="ml-4 flex-shrink-0 flex">
-                                            <button onClick={() => setConfirm(false)} className="bg-white rounded-md inline-flex text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                            <button onClick={() => setConfirm(false)} className="bg-white rounded-md inline-flex text-gray-400 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                                                 <span class="sr-only">Close</span>
                                                 <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                                     <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -451,16 +451,16 @@ export default () => {
                                         <CheckIcon className="h-6 w-6 text-green-600" aria-hidden="true" />
                                     </div>
                                     <div className="mt-3 text-center sm:mt-5">
-                                        <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-gray-900">
+                                        <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-blue-600">
                                             New Account Created
                                         </Dialog.Title>
                                         <CopyToClipboard text={"stateset address: " + inputs.address + " mnemonic seed: " + inputs.mnemonic}>
                                             <div>
-                                                <p className="mt-3 px-2 text-xs text-gray-500">
+                                                <p className="mt-3 px-2 text-xs text-blue-600">
                                                     {inputs.address}
                                                 </p>
                                                 <div className="mt-4">
-                                                    <p className="text-sm text-gray-500">
+                                                    <p className="text-sm text-blue-600">
                                                         Your 12 word account password is: <br /><strong>{inputs.mnemonic}</strong>
                                                     </p>
                                                 </div>
@@ -468,7 +468,7 @@ export default () => {
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
                                                     </svg>
-                                                    <p className="text-gray-500 text-sm">Copy To Clipboard</p>
+                                                    <p className="text-blue-600 text-sm">Copy To Clipboard</p>
                                                 </div>
                                             </div>
                                         </CopyToClipboard>
@@ -557,11 +557,11 @@ export default () => {
                                         <CheckIcon className="h-6 w-6 text-green-600" aria-hidden="true" />
                                     </div>
                                     <div className="mt-3 text-center sm:mt-5">
-                                        <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-gray-900">
+                                        <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-blue-600">
                                             Transaction successful
                                         </Dialog.Title>
                                         <div className="mt-2">
-                                            <p className="text-sm text-gray-500">
+                                            <p className="text-sm text-blue-600">
                                                 Your transaction has been sent.
                                             </p>
                                         </div>
@@ -613,7 +613,7 @@ export default () => {
                             <div className="w-full inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6">
                                 <div>
                                     <div className="mt-3 text-center sm:mt-5">
-                                        <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-gray-900">
+                                        <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-blue-600">
                                             Receive
                                         </Dialog.Title>
                                         <div className="mt-5 mb-3 inline-block items-center justify-center">
@@ -622,14 +622,14 @@ export default () => {
                                         <div className="mt-2">
                                             <CopyToClipboard text={inputs.address}>
                                                 <div>
-                                                    <div class="mb-2 px-2 py-1 mr-2 font-bold leading-none text-gray-500 bg-white rounded-fulltext-ellipsis overflow-hidden text-xs text-center rounded-full">
+                                                    <div class="mb-2 px-2 py-1 mr-2 font-bold leading-none text-blue-600 bg-white rounded-fulltext-ellipsis overflow-hidden text-xs text-center rounded-full">
                                                         {inputs.address}
                                                     </div>
                                                     <div className="flex items-center justify-center" onClick={() => setMyAddressCopied(true)}>
                                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
                                                         </svg>
-                                                        <p className="text-gray-500 text-sm">Copy To Clipboard</p>
+                                                        <p className="text-blue-600 text-sm">Copy To Clipboard</p>
                                                     </div>
                                                 </div>
                                             </CopyToClipboard>
@@ -685,8 +685,8 @@ export default () => {
                 <dl className="mb-1 grid grid-cols-1 gap-8 sm:grid-cols-1">
                     {stats.map((item) => (
                         <div key={item.name} className="mlpx-4 py-5 dark:bg-slate-900 bg-white rounded-lg overflow-hidden sm:p-6">
-                            <dt className="tracking-tight text-sm font-medium dark:text-white text-gray-500 truncate">{item.name}</dt>
-                            <dd className="mt-1 text-3xl font-semibold dark:text-white text-gray-900">ⓢ {item.stat}</dd>
+                            <dt className="tracking-tight text-sm font-medium dark:text-white text-blue-600 truncate">{item.name}</dt>
+                            <dd className="mt-1 text-3xl font-semibold dark:text-white text-blue-600">ⓢ {item.stat}</dd>
                         </div>
                     ))}
                 </dl>
@@ -701,8 +701,8 @@ export default () => {
                     <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                         <path vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
                     </svg>
-                    <h3 class="mt-2 text-sm font-medium text-gray-900"></h3>
-                    <p class="mt-1 text-sm text-gray-500">
+                    <h3 class="mt-2 text-sm font-medium text-blue-600"></h3>
+                    <p class="mt-1 text-sm text-blue-600">
                         Get started by creating a new wallet.
                     </p>
 
@@ -718,7 +718,7 @@ export default () => {
             </Transition.Root>
 
             <div className="mt-3">
-                <h1 className="dark:text-white py-3 mr-3 float-left text-lg leading-6 font-medium text-gray-900">
+                <h1 className="dark:text-white py-3 mr-3 float-left text-lg leading-6 font-medium text-blue-600">
                     Send
                 </h1>
                 <div className="mt-2.5 rounded px-0.5 float-right text-green-500 text-xs">
@@ -727,29 +727,29 @@ export default () => {
                         stateset-1-testnet - {inputs.height}
                     </span>
                 </div>
-                <p className="dark:text-white py-4 text-sm tracking-tight text-gray-500 lg:visible md:visible invisible">
+                <p className="dark:text-white py-4 text-sm tracking-tight text-blue-600 lg:visible md:visible invisible">
                     Send transactions
                 </p>
             </div>
             <div>
-                <label for="account-number" class="dark:text-white block text-sm font-medium text-gray-700 float-left">To Address</label>
+                <label for="account-number" class="dark:text-white block text-sm font-medium text-blue-600 float-left">To Address</label>
                 <div class="mt-2 relative rounded-md shadow-sm">
                     <input type="text" name="recipient" id="recipient" class="dark:bg-slate-900 dark:text-white focus:ring-blue-500 focus:border-blue-500 block w-full pr-2 text-ellipsis truncate sm:text-sm border-gray-300 rounded-md" placeholder="stateset28x8..." onChange={handleOnChange} value={inputs.recipient} />
                 </div>
             </div>
             <div>
-                <label for="price" class="dark:text-white block text-sm font-medium text-gray-700 float-left">Send Amount</label>
+                <label for="price" class="dark:text-white block text-sm font-medium text-blue-600 float-left">Send Amount</label>
                 <div class="mt-2 relative rounded-md shadow-sm">
                     <input type="text" name="amount" id="amount" class="dark:bg-slate-900 dark:text-white focus:ring-blue-500 focus:border-blue-500 block w-full p2-2 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="28" aria-describedby="price-currency" onChange={handleOnChange} value={inputs.amount} />
                     <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                        <span class="dark:text-white pt-5 text-gray-500 sm:text-sm" id="price-currency">
+                        <span class="dark:text-white pt-5 text-blue-600 sm:text-sm" id="price-currency">
                             STATE
                         </span>
                     </div>
                 </div>
             </div>
             <div>
-                <label for="memo" class="dark:text-white block text-sm font-medium text-gray-700 float-left">Message</label>
+                <label for="memo" class="dark:text-white block text-sm font-medium text-blue-600 float-left">Message</label>
                 <div class="mt-2 relative rounded-md shadow-sm">
                     <input type="text" name="memo" id="memo" class="dark:bg-slate-900 dark:text-white focus:ring-blue-500 focus:border-blue-500 block w-full pr-2 text-ellipsis truncate sm:text-sm border-gray-300 rounded-md" placeholder="optional unencrypted message" onChange={handleOnChange} value={inputs.memo} />
                 </div>
