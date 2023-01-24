@@ -48,9 +48,6 @@ export default function OnboardingBar() {
               <div className="relative flex items-center justify-between h-16">
                 {/* Logo section */}
                 <div className="flex items-center px-2 lg:px-0 xl:w-64">
-                  <div className="flex-shrink-0">
-                    <img className="h-8 w-22" src="/statesetbluelogo.svg"/>
-                  </div>
                 </div>
                 <div className="flex-1 flex justify-center lg:justify-end">
                   <div className="w-full px-2 lg:px-6">

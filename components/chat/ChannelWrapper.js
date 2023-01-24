@@ -105,6 +105,7 @@ class ChannelChatWrapper extends Component {
                             return (
                                 <>
                                     <div className="chatDialog dark:bg-slate-900">
+                                    <canvas id="myCanvas" width="330" height="100" ></canvas>
                                         <motion.div initial="exit" animate="enter" exit="exit">
                                             <motion.div variants={textVariants}>
                                                 <ChannelTextbox channel_id={this.props.channel_id.id} username={this.props.user.username} user_id={this.props.user.id} />

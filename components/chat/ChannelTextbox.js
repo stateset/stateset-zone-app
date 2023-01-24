@@ -100,27 +100,27 @@ export default class ChannelTextbox extends React.Component {
 
 
 
-  // Handle Typing
+    // Handle Typing
 
-  handleAITyping = (mutate) => {
+    handleAITyping = (mutate) => {
 
-    this.emitAITypingEvent(mutate);
+        this.emitAITypingEvent(mutate);
 
-  }
-
-  // Emit Typing
-
-
-  emitAITypingEvent = async (mutate) => {
-    if (this.state.user) {
-      await mutate({
-        mutation: emitTypingEvent,
-        variables: {
-          username: 'StateGPT'
-        }
-      });
     }
-  }
+
+    // Emit Typing
+
+
+    emitAITypingEvent = async (mutate) => {
+        if (this.state.user) {
+            await mutate({
+                mutation: emitTypingEvent,
+                variables: {
+                    username: 'StateGPT'
+                }
+            });
+        }
+    }
 
     // Handle Usage Record Creation in Stripe
 
@@ -182,7 +182,7 @@ export default class ChannelTextbox extends React.Component {
     // Handle Chat Response
 
     handleResponse = async (status, msg, mutate, isCode) => {
-        
+
         if (status === 200) {
             var min = 1;
             var max = 100;
@@ -308,44 +308,44 @@ export default class ChannelTextbox extends React.Component {
     };
 
 
-  // Generate Edit
+    // Generate Edit
 
-  generateEdit = async (client) => {
-    const res = await fetch('/api/ai/edit', {
-      method: 'POST',
-      headers:
-      {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        "body": this.state.body,
-      })
-    });
-    
-    this.handleAITyping(client.mutate);
+    generateEdit = async (client) => {
+        const res = await fetch('/api/ai/edit', {
+            method: 'POST',
+            headers:
+            {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "body": this.state.body,
+            })
+        });
 
-    const gpt_text = await res.json()
-    this.handleResponse(res.status, gpt_text.choices[0].text, client.mutate, false)
+        this.handleAITyping(client.mutate);
 
-  };
+        const gpt_text = await res.json()
+        this.handleResponse(res.status, gpt_text.choices[0].text, client.mutate, false)
 
-  // Generate Edit
+    };
 
-  generateTranslation = async (client) => {
-    const res = await fetch('/api/ai/translate', {
-      method: 'POST',
-      headers:
-      {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        "body": this.state.body,
-      })
-    });
-    const gpt_text = await res.json()
-    this.handleResponse(res.status, gpt_text.choices[0].text, client.mutate, false)
+    // Generate Edit
 
-  };
+    generateTranslation = async (client) => {
+        const res = await fetch('/api/ai/translate', {
+            method: 'POST',
+            headers:
+            {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "body": this.state.body,
+            })
+        });
+        const gpt_text = await res.json()
+        this.handleResponse(res.status, gpt_text.choices[0].text, client.mutate, false)
+
+    };
 
 
     // Handle Approve
@@ -469,7 +469,7 @@ export default class ChannelTextbox extends React.Component {
         const _delay = ms => new Promise(res => setTimeout(res, ms));
         await _delay(2000);
         const gpt_text = await res.json();
-        
+
         this.handleResponse(res.status, gpt_text.choices[0].text, client.mutate, false);
     };
 
@@ -568,7 +568,7 @@ export default class ChannelTextbox extends React.Component {
                     (insert_message, { data, loading, error, client }) => {
                         const sendMessage = (e) => {
                             e.preventDefault();
-                            if (this.state.body) {
+                            if ((this.state.body) && (!this.state.body.includes('make the', 'code', '/code', 'put a', 'draw a', 'alert'))) {
                                 insert_message();
                                 this.handleChat(client);
                                 this.setState({
@@ -582,12 +582,13 @@ export default class ChannelTextbox extends React.Component {
                                     toUser: name_string,
                                 })
                                 this.sendText();
-                            } else if (this.state.body.includes('make the', 'code', '/code', 'put a', 'draw a')) {
+                            } else if (this.state.body.includes('make the', 'code', 'code a', '/code', 'put a', 'draw a', 'alert')) {
                                 insert_message();
                                 this.handleCode(client);
                                 this.setState({
                                     body: ""
                                 });
+
                             } else if (this.state.body.includes('/dark-mode', 'dark mode')) {
                                 insert_message();
                                 this.handleDarkMode(client, "dark");

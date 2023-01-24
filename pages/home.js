@@ -77,7 +77,6 @@ const Home = () => {
                                         <br/>
                                         <CreateChanelThreadModal />
                                     </nav>
-                                    <div id="myCanvas"></div>
                                 </div>
                             </div>
                         </div>
