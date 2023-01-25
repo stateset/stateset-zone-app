@@ -112,7 +112,7 @@ export default () => {
                 console.log("my address: ", myFirstAccount.address);
                 let _address = '';
 
-                const my_client = await SigningStargateClient.connectWithSigner(stateset_rpcEndpoint, my_wallet, { gasPrice: "0.025state" });
+                const my_client = await SigningStargateClient.connectWithSigner(stateset_rpcEndpoint, my_wallet, { gasPrice: "0.00025state" });
                 const my_st_balance = await my_client.getBalance(myFirstAccount.address, "state");
                 const my_stk_balance = await my_client.getBalance(myFirstAccount.address, "stake");
                 const height = await my_client.getHeight();
@@ -158,7 +158,7 @@ export default () => {
         console.log(FirstAccount);
         console.log(FirstAccount.address);
 
-        const _client = await SigningStargateClient.connectWithSigner(rpcEndpoint, _wallet, { gasPrice: "0.025state" });
+        const _client = await SigningStargateClient.connectWithSigner(rpcEndpoint, _wallet, { gasPrice: "0.00025state" });
 
         const recipient = address;
 
@@ -226,7 +226,7 @@ export default () => {
                 coinType: 118,
                 gasPriceStep: {
                     low: 0.01,
-                    average: 0.025,
+                    average: 0.00025,
                     high: 0.03,
                 },
             });
@@ -282,7 +282,7 @@ export default () => {
         console.log(firstAccount.address);
 
         const rpcEndpoint = "https://rpc.stateset.zone";
-        const client = await SigningStargateClient.connectWithSigner(rpcEndpoint, wallet, { gasPrice: "0.025state" });
+        const client = await SigningStargateClient.connectWithSigner(rpcEndpoint, wallet, { gasPrice: "0.00025state" });
 
         const recipient = inputs.recipient;
         const amount = {

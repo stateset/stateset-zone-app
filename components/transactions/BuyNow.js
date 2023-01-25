@@ -144,7 +144,7 @@ export default (props) => {
                 coinType: 118,
                 gasPriceStep: {
                     low: 0.01,
-                    average: 0.025,
+                    average: 0.00025,
                     high: 0.03,
                 },
             });
@@ -170,7 +170,7 @@ export default (props) => {
         console.log(firstAccount.address);
 
         const rpcEndpoint = "https://rpc.stateset.zone";
-        const client = await SigningStargateClient.connectWithSigner(rpcEndpoint, wallet, { gasPrice: "0.025state" });
+        const client = await SigningStargateClient.connectWithSigner(rpcEndpoint, wallet, { gasPrice: "0.00025state" });
 
         const recipient = "stateset1na53ljfnfjjjapmxpu6ctd5fgxzvnm66k0pqft";
         const amount = {

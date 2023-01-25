@@ -69,7 +69,7 @@ export default () => {
 
         // Rpc Endpoint
         const rpcEndpoint = "http://stateset.zone:26657";
-        const client = await SigningStargateClient.connectWithSigner(rpcEndpoint, wallet, { registry: registry, gasPrice: "0.025state" });
+        const client = await SigningStargateClient.connectWithSigner(rpcEndpoint, wallet, { registry: registry, gasPrice: "0.00025state" });
 
     }
 

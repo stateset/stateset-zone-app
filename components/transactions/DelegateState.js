@@ -100,7 +100,7 @@ export default () => {
                 console.log("my address: ", myFirstAccount.address);
                 let _address = '';
 
-                const my_client = await SigningStargateClient.connectWithSigner(stateset_rpcEndpoint, my_wallet, { gasPrice: "0.025state" });
+                const my_client = await SigningStargateClient.connectWithSigner(stateset_rpcEndpoint, my_wallet, { gasPrice: "0.00025state" });
                 const my_st_balance = await my_client.getBalance(myFirstAccount.address, "state");
                 const my_stk_balance = await my_client.getBalance(myFirstAccount.address, "stake");
                 const height = await my_client.getHeight();
@@ -186,7 +186,7 @@ export default () => {
         console.log(myFirstAccount);
         console.log(myFirstAccount.address);
 
-        const client = await SigningStargateClient.connectWithSigner(stateset_rpcEndpoint, my_wallet, { gasPrice: "0.025state" });
+        const client = await SigningStargateClient.connectWithSigner(stateset_rpcEndpoint, my_wallet, { gasPrice: "0.00025state" });
 
         // Memo
         const memo = "Use your power wisely";
@@ -209,7 +209,7 @@ export default () => {
         const [myFirstAccount] = await my_wallet.getAccounts();
         console.log(myFirstAccount);
         console.log(myFirstAccount.address);
-        const client = await SigningStargateClient.connectWithSigner(stateset_rpcEndpoint, my_wallet, { gasPrice: "0.025state" });
+        const client = await SigningStargateClient.connectWithSigner(stateset_rpcEndpoint, my_wallet, { gasPrice: "0.00025state" });
 
         // Memo
         const memo = "Use your power wisely";

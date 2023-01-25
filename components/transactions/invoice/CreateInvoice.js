@@ -107,7 +107,7 @@ export default () => {
 
         const rpcEndpoint = "https://rpc.stateset.zone";
 
-        const client = await SigningStargateClient.connectWithSigner(rpcEndpoint, wallet, { registry: myRegistry, gasPrice: "0.025state" });
+        const client = await SigningStargateClient.connectWithSigner(rpcEndpoint, wallet, { registry: myRegistry, gasPrice: "0.00025state" });
 
         if (client) {
 

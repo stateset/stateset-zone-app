@@ -97,7 +97,7 @@ export default () => {
         console.log(firstAccount.address);
 
         const rpcEndpoint = "https://rpc.stateset.zone";
-        const client = await SigningStargateClient.connectWithSigner(rpcEndpoint, wallet, { gasPrice: "0.025state" });
+        const client = await SigningStargateClient.connectWithSigner(rpcEndpoint, wallet, { gasPrice: "0.00025state" });
 
         console.log(inputs.recipient);
         console.log(inputs.amount);
@@ -132,7 +132,7 @@ export default () => {
         console.log(firstAccount.address);
 
         const rpcEndpoint = "https://rpc.stateset.zone";
-        const client = await SigningStargateClient.connectWithSigner(rpcEndpoint, wallet, { gasPrice: "0.025state" });
+        const client = await SigningStargateClient.connectWithSigner(rpcEndpoint, wallet, { gasPrice: "0.00025state" });
 
         const recipient = inputs.recipient;
         const amount = {

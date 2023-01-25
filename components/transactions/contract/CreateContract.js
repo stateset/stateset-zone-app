@@ -140,7 +140,7 @@ export default () => {
         const [firstAccount] = await wallet.getAccounts();
 
         const rpcEndpoint = "https://rpc.stateset.app";
-        const client = await SigningStargateClient.connectWithSigner(rpcEndpoint, wallet, { gasPrice: "0.025state" });
+        const client = await SigningStargateClient.connectWithSigner(rpcEndpoint, wallet, { gasPrice: "0.00025state" });
         console.log(client);
 
         setOpen(true);

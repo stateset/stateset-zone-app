@@ -27,7 +27,7 @@ export default function OnboardingBar() {
 
             const stateset_rpcEndpoint = "https://rpc.stateset.zone";
 
-            const my_client = await SigningStargateClient.connectWithSigner(stateset_rpcEndpoint, my_wallet, { gasPrice: "0.025state" });
+            const my_client = await SigningStargateClient.connectWithSigner(stateset_rpcEndpoint, my_wallet, { gasPrice: "0.00025state" });
             height = await my_client.getHeight();
 
             console.log("stateset blockchain height: ", height);
