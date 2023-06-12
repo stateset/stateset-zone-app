@@ -86,7 +86,7 @@ const Home = () => {
                             <div className="h-full py-6 px-4 sm:px-6 lg:px-8">
                                 <div className="relative h-full" style={{ minHeight: '36rem' }}>
                                     <div className="rounded-lg" />
-                                    <HomeWrapper />
+                                    
                                 </div>
                             </div>
                         </div>
