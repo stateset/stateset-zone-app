@@ -24,7 +24,7 @@ export default withAuth((req, res) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': proces.env.OPEN_AI,
+                'Authorization': process.env.OPEN_AI,
             },
             body: raw,
             redirect: 'follow'
