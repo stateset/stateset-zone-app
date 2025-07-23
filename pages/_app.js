@@ -1,92 +1,88 @@
 import '../styles/global.css'
-import ApolloClient from 'apollo-client';
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import { HttpLink } from 'apollo-link-http';
-import { ApolloProvider } from 'react-apollo';
-import { WebSocketLink } from 'apollo-link-ws';
-import { split } from 'apollo-link';
-import { getMainDefinition } from 'apollo-utilities';
-import { ClerkProvider, SignedIn, SignedOut, RedirectToSignIn } from '@clerk/clerk-react'
-import { useRouter } from 'next/router';
-import { useSession } from "@clerk/nextjs";
+import { ClerkProvider, SignedIn, SignedOut, RedirectToSignIn } from '@clerk/nextjs'
+import { ApolloProvider, InMemoryCache, ApolloClient, createHttpLink } from '@apollo/client'
+import { setContext } from '@apollo/client/link/context'
+import { useRouter } from 'next/router'
+import Layout from '../components/Layout'
 
-var clientId = '';
-if (process.browser) {
-  clientId = localStorage.getItem("client")
-};
-
-export const GRAPHQL_ENDPOINT = process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT;
-export const WEBSOCKET_ENDPOINT = process.env.NEXT_PUBLIC_WEBSOCKET_ENDPOINT;
-
-const wsLink = process.browser ? new WebSocketLink({ // if you instantiate in the server, the error will be thrown
-  uri: WEBSOCKET_ENDPOINT,
-  credentials: 'same-origin',
-  options: {
-    reconnect: true,
-    connectionParams: {
-      headers: {
-        'x-hasura-admin-secret': process.env.NEXT_PUBLIC_ADMIN_SECRET
-      }
-    }
-  }
-}) : null;
-
-const httplink = new HttpLink({
-  uri: GRAPHQL_ENDPOINT,
-  credentials: 'same-origin',
-  headers: {
-    'x-hasura-admin-secret': process.env.NEXT_PUBLIC_ADMIN_SECRET
-  }
-});
-
-const link = process.browser ? split( //only create the split in the browser
-  // split based on operation type
-  ({ query }) => {
-    const { kind, operation } = getMainDefinition(query);
-    return kind === 'OperationDefinition' && operation === 'subscription';
-  },
-  wsLink,
-  httplink,
-) : httplink;
-
-const client = new ApolloClient({
-  link,
-  cache: new InMemoryCache({
-    addTypename: false
-  })
+// GraphQL endpoint configuration
+const httpLink = createHttpLink({
+  uri: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT || 'http://localhost:8080/v1/graphql',
 })
 
-const publicPages = ['/', '/sign-in/[[...index]]', '/sign-up/[[...index]]', '/invoices', '/purchaseorders', '/loans'];
+// Auth link to add headers
+const authLink = setContext((_, { headers }) => {
+  return {
+    headers: {
+      ...headers,
+      'x-hasura-admin-secret': process.env.NEXT_PUBLIC_ADMIN_SECRET,
+    }
+  }
+})
 
+// Apollo Client instance
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache({
+    addTypename: false
+  }),
+  defaultOptions: {
+    watchQuery: {
+      errorPolicy: 'all'
+    },
+    query: {
+      errorPolicy: 'all'
+    }
+  }
+})
 
-function MyApp({ Component, pageProps }) {
+// Public pages that don't require authentication
+const publicPages = [
+  '/',
+  '/sign-in/[[...index]]',
+  '/sign-up/[[...index]]',
+  '/invoices',
+  '/purchaseorders',
+  '/loans'
+]
 
-
-  const { pathname, push } = useRouter();
-
+export default function MyApp({ Component, pageProps }) {
+  const { pathname, push } = useRouter()
+  
   // Check if the current route matches a public page
-  const isPublicPage = publicPages.includes(pathname);
+  const isPublicPage = publicPages.includes(pathname)
+
+  // Get page title from component or use pathname
+  const getPageTitle = () => {
+    if (Component.displayName) return Component.displayName
+    if (pathname === '/') return 'Welcome'
+    if (pathname === '/home') return 'Dashboard'
+    return pathname.split('/')[1]?.replace(/[-_]/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) || 'StateSet Zone'
+  }
 
   return (
     <ClerkProvider 
-    frontendApi={process.env.NEXT_PUBLIC_CLERK_FRONTEND_API}
-    navigate={(to) => push(to)} >
-            {isPublicPage ? (
-        <Component {...pageProps} />
-      ) : (
-        <>
+      publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+      navigate={(to) => push(to)}
+    >
       <ApolloProvider client={client}>
-        <SignedIn>
-          <Component {...pageProps} />
-        </SignedIn>
-        <SignedOut>
-          <RedirectToSignIn />
-        </SignedOut>
+        {isPublicPage ? (
+          <Layout title={getPageTitle()}>
+            <Component {...pageProps} />
+          </Layout>
+        ) : (
+          <>
+            <SignedIn>
+              <Layout title={getPageTitle()}>
+                <Component {...pageProps} />
+              </Layout>
+            </SignedIn>
+            <SignedOut>
+              <RedirectToSignIn />
+            </SignedOut>
+          </>
+        )}
       </ApolloProvider>
-      </>
-      )}
     </ClerkProvider>
-  );
+  )
 }
-
-export default MyApp

@@ -1,133 +1,437 @@
 import Head from 'next/head'
-import Image from 'next/image'
-import { motion } from 'framer-motion';
-import OnboardingBar from 'components/OnboardingBar'
-import { useRouter } from 'next/router';
-import HomeWrapper from 'components/chat/HomeWrapper';
-import { Dialog, Transition } from '@headlessui/react'
-import { Fragment, useRef, useState, useEffect, useContext } from 'react'
-import { withUser, useUser } from '@clerk/clerk-react';
 import Link from 'next/link'
-
+import { motion } from 'framer-motion'
+import { useUser } from '@clerk/nextjs'
 import {
-    AcademicCapIcon,
-    BadgeCheckIcon,
-    CashIcon,
-    ClockIcon,
-    DocumentTextIcon,
-    ReceiptRefundIcon,
-    HomeIcon,
-    CalendarIcon,
-    UserGroupIcon,
-    SearchCircleIcon,
-    SpeakerphoneIcon,
-    MailIcon,
-    PhoneIcon,
-    CreditCardIcon,
-    TicketIcon,
-    RefreshIcon,
-    ShoppingBagIcon,
-    ShoppingCartIcon,
-    CubeTransparentIcon,
-    MapIcon,
-    UsersIcon,
-} from '@heroicons/react/outline'
-import CreateAccount from 'components/transactions/account/CreateAccount';
-import CreateChanelThreadModal from 'components/chat/CreateChannelThreadModal';
+  PlusIcon,
+  DocumentTextIcon,
+  ShoppingBagIcon,
+  BanknotesIcon,
+  DocumentCheckIcon,
+  ChartBarIcon,
+  UserGroupIcon,
+  ArrowTrendingUpIcon,
+  ArrowTrendingDownIcon,
+  EyeIcon,
+  ClockIcon,
+  CheckCircleIcon,
+  ExclamationTriangleIcon,
+} from '@heroicons/react/24/outline'
 
-
-function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
-}
-
-const navigation = [
-    
+const quickActions = [
+  {
+    name: 'Create Invoice',
+    description: 'Generate a new invoice',
+    href: '/invoices/create',
+    icon: DocumentTextIcon,
+    color: 'bg-blue-500 hover:bg-blue-600',
+  },
+  {
+    name: 'New Purchase Order',
+    description: 'Create purchase order',
+    href: '/purchaseorders/create',
+    icon: ShoppingBagIcon,
+    color: 'bg-green-500 hover:bg-green-600',
+  },
+  {
+    name: 'Apply for Loan',
+    description: 'Request financing',
+    href: '/loans/create',
+    icon: BanknotesIcon,
+    color: 'bg-purple-500 hover:bg-purple-600',
+  },
+  {
+    name: 'Deploy Contract',
+    description: 'Create smart contract',
+    href: '/contracts/create',
+    icon: DocumentCheckIcon,
+    color: 'bg-orange-500 hover:bg-orange-600',
+  },
 ]
 
-const Home = () => {
+const metrics = [
+  {
+    name: 'Total Revenue',
+    value: '$45,231.89',
+    change: '+20.1%',
+    changeType: 'positive',
+    icon: BanknotesIcon,
+  },
+  {
+    name: 'Active Contracts',
+    value: '12',
+    change: '+2',
+    changeType: 'positive',
+    icon: DocumentCheckIcon,
+  },
+  {
+    name: 'Pending Invoices',
+    value: '8',
+    change: '-3',
+    changeType: 'negative',
+    icon: DocumentTextIcon,
+  },
+  {
+    name: 'Loan Portfolio',
+    value: '$12,405.00',
+    change: '+5.2%',
+    changeType: 'positive',
+    icon: ChartBarIcon,
+  },
+]
 
-    const { user } = useUser();
+const recentActivity = [
+  {
+    id: 1,
+    type: 'invoice',
+    title: 'Invoice #INV-2024-001 paid',
+    description: 'Payment received from Acme Corp',
+    time: '2 hours ago',
+    status: 'completed',
+    amount: '$2,500.00',
+  },
+  {
+    id: 2,
+    type: 'loan',
+    title: 'Loan application approved',
+    description: 'DeFi loan for working capital',
+    time: '4 hours ago',
+    status: 'approved',
+    amount: '$15,000.00',
+  },
+  {
+    id: 3,
+    type: 'contract',
+    title: 'Smart contract deployed',
+    description: 'Supply chain contract activated',
+    time: '1 day ago',
+    status: 'active',
+    amount: null,
+  },
+  {
+    id: 4,
+    type: 'purchase_order',
+    title: 'Purchase Order #PO-2024-001',
+    description: 'New order from supplier',
+    time: '2 days ago',
+    status: 'pending',
+    amount: '$8,750.00',
+  },
+]
 
-    return (
-        <div class="light">
-            <Head>
-                <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.3.2/build/styles/night-owl.min.css" />
-            </Head>
-
-            <OnboardingBar />
-            <body class="antialiased font-sans">
-                <div className="flex-grow w-full max-w-7xl mx-auto xl:px-8 lg:flex">
-                    <div className="flex-1 min-w-0 dark:bg-slate-900 bg-white xl:flex">
-                        <div className="border-b border-gray-200 xl:border-b-0 xl:flex-shrink-0 xl:w-64 xl:border-r xl:border-gray-200 dark:bg-slate-900 bg-white">
-                            <div className="h-full pl-4 pr-6 py-6 sm:pl-6 lg:pl-8 xl:pl-0">
-                                <h2 class="text-lg dark:text-white text-blue-600 font-semibold">Welcome, {user.username}</h2>
-                                <div className="h-full relative" style={{ minHeight: '12rem' }}>
-                                    <div className="rounded-lg" />
-                                    <nav className="mt-5 flex-1">
-                                        <div className="px-2 space-y-1">
-                                            {navigation.map((item) => (
-                                                <Link href={`/${item.href}`} as={`/${item.href}`} >
-                                                    <a href={item.href} className={classNames(item.current ? 'dark:bg-slate-900 dark:text-gray-300 bg-white text-gray-900' : 'bg-white hover:bg-gray-50 hover:text-gray-900', 'group flex items-center px-2 py-2 text-sm font-medium rounded-md')} >
-                                                        <item.icon className={classNames(item.current ? 'dark:text-gray-400 text-blue-600' : 'text-gray-400 group-hover:text-blue-600', 'mr-3 h-6 w-6')} />
-                                                        {item.name}
-                                                    </a>
-                                                </Link>
-                                            ))}
-                                        </div>
-                                        <br/>
-                                        <CreateChanelThreadModal />
-                                    </nav>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div className="dark:bg-slate-900 bg-white lg:min-w-0 lg:flex-1">
-                            <div className="h-full py-6 px-4 sm:px-6 lg:px-8">
-                                <div className="relative h-full" style={{ minHeight: '36rem' }}>
-                                    <div className="rounded-lg" />
-                                    
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-                    <div className="dark:bg-slate-900 bg-white pr-4 sm:pr-6 lg:pr-8 lg:flex-shrink-0 lg:border-l lg:border-gray-200 xl:pr-0">
-                        <div className="pl-6 py-6 lg:w-92">
-                            <CreateAccount />
-                        </div>
-                        <footer className="ml-2 flex justify-center bottom-0">
-                        <div className="flex justify-center mb-8">
-                            <p className="text-blue-600 mr-3"><a href="https://docs.stateset.io/stateset-docs/stateset-network">Docs</a></p>
-                            <p className="text-blue-600 mr-3"><a href="https://rpc.stateset.zone">RPC</a></p>
-                            <p className="text-blue-600 mr-3"><a href="https://app.stateset.zone/stateset.pdf">Whitepaper</a></p>
-                            <p className="text-blue-600 mr-3"><a href="https://rpc.stateset.zone/genesis">Genesis</a></p>
-                            </div>
-                            <br/>
-                            <div className="flex justify-center mb-8">
-                            <a href="https://github.com/stateset">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="fill-current text-blue-600 mr-3"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                            </svg>
-                            </a>
-                            <a href="https://twitter.com/stateset">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="fill-current text-blue-600 mr-3">
-                                    <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path>
-                                </svg>
-                            </a>
-                            <a  href="https://discord.gg/YYF2ACHshf">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="text-blue-600" viewBox="0 0 16 16">
-                                    <path d="M13.545 2.907a13.227 13.227 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.19 12.19 0 0 0-3.658 0 8.258 8.258 0 0 0-.412-.833.051.051 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.041.041 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032c.001.014.01.028.021.037a13.276 13.276 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019c.308-.42.582-.863.818-1.329a.05.05 0 0 0-.01-.059.051.051 0 0 0-.018-.011 8.875 8.875 0 0 1-1.248-.595.05.05 0 0 1-.02-.066.051.051 0 0 1 .015-.019c.084-.063.168-.129.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.052.052 0 0 1 .053.007c.08.066.164.132.248.195a.051.051 0 0 1-.004.085 8.254 8.254 0 0 1-1.249.594.05.05 0 0 0-.03.03.052.052 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.235 13.235 0 0 0 4.001-2.02.049.049 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.034.034 0 0 0-.02-.019Zm-8.198 7.307c-.789 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612Zm5.316 0c-.788 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612Z" />
-                                </svg>
-                            </a>
-                            </div>
-                    </footer>
-                    </div>
-                </div>
-            </body>
-        </div>
-    )
+const statusColors = {
+  completed: 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400',
+  approved: 'bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400',
+  active: 'bg-purple-100 text-purple-800 dark:bg-purple-900/20 dark:text-purple-400',
+  pending: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400',
 }
 
-export default withUser(Home);
+const statusIcons = {
+  completed: CheckCircleIcon,
+  approved: CheckCircleIcon,
+  active: EyeIcon,
+  pending: ClockIcon,
+}
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ')
+}
+
+export default function Dashboard() {
+  const { user, isLoaded } = useUser()
+
+  if (!isLoaded) {
+    return (
+      <div className="flex items-center justify-center min-h-96">
+        <div className="spinner w-8 h-8" />
+      </div>
+    )
+  }
+
+  return (
+    <div className="space-y-8">
+      <Head>
+        <title>Dashboard - StateSet Zone</title>
+      </Head>
+
+      {/* Welcome Section */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+      >
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-2xl font-bold text-accent-900 dark:text-accent-100">
+              Welcome back, {user?.firstName || 'User'}!
+            </h1>
+            <p className="mt-1 text-sm text-accent-600 dark:text-accent-400">
+              Here's what's happening with your business operations today.
+            </p>
+          </div>
+          <div className="flex items-center space-x-3">
+            <button className="btn-outline">
+              <ChartBarIcon className="h-4 w-4 mr-2" />
+              Export Data
+            </button>
+            <button className="btn-primary">
+              <PlusIcon className="h-4 w-4 mr-2" />
+              Quick Action
+            </button>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Metrics Grid */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.1 }}
+      >
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {metrics.map((metric, index) => (
+            <motion.div
+              key={metric.name}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4, delay: index * 0.1 }}
+              className="card hover:shadow-md transition-shadow"
+            >
+              <div className="card-body">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-accent-600 dark:text-accent-400">
+                      {metric.name}
+                    </p>
+                    <p className="text-2xl font-semibold text-accent-900 dark:text-accent-100">
+                      {metric.value}
+                    </p>
+                  </div>
+                  <div className="p-3 bg-primary-100 dark:bg-primary-900/20 rounded-lg">
+                    <metric.icon className="h-6 w-6 text-primary-600 dark:text-primary-400" />
+                  </div>
+                </div>
+                <div className="mt-4 flex items-center">
+                  {metric.changeType === 'positive' ? (
+                    <ArrowTrendingUpIcon className="h-4 w-4 text-green-500 mr-1" />
+                  ) : (
+                    <ArrowTrendingDownIcon className="h-4 w-4 text-red-500 mr-1" />
+                  )}
+                  <span className={classNames(
+                    metric.changeType === 'positive' ? 'text-green-600' : 'text-red-600',
+                    'text-sm font-medium'
+                  )}>
+                    {metric.change}
+                  </span>
+                  <span className="text-sm text-accent-500 ml-1">from last month</span>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
+
+      {/* Quick Actions */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      >
+        <div className="card">
+          <div className="card-header">
+            <h2 className="text-lg font-semibold text-accent-900 dark:text-accent-100">
+              Quick Actions
+            </h2>
+            <p className="text-sm text-accent-600 dark:text-accent-400">
+              Start your most common tasks
+            </p>
+          </div>
+          <div className="card-body">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {quickActions.map((action, index) => (
+                <motion.div
+                  key={action.name}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: index * 0.1 }}
+                >
+                  <Link
+                    href={action.href}
+                    className="group relative block p-6 border border-accent-200 dark:border-accent-700 rounded-lg hover:border-primary-300 dark:hover:border-primary-600 transition-colors"
+                  >
+                    <div className="flex items-center">
+                      <div className={classNames(action.color, 'p-3 rounded-lg transition-colors')}>
+                        <action.icon className="h-6 w-6 text-white" />
+                      </div>
+                      <div className="ml-4">
+                        <h3 className="text-sm font-medium text-accent-900 dark:text-accent-100 group-hover:text-primary-600 dark:group-hover:text-primary-400">
+                          {action.name}
+                        </h3>
+                        <p className="text-xs text-accent-600 dark:text-accent-400">
+                          {action.description}
+                        </p>
+                      </div>
+                    </div>
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Recent Activity and Summary */}
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+        {/* Recent Activity */}
+        <motion.div
+          className="lg:col-span-2"
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
+          <div className="card">
+            <div className="card-header">
+              <div className="flex items-center justify-between">
+                <h2 className="text-lg font-semibold text-accent-900 dark:text-accent-100">
+                  Recent Activity
+                </h2>
+                <Link href="/activity" className="text-sm text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300">
+                  View all
+                </Link>
+              </div>
+            </div>
+            <div className="card-body p-0">
+              <div className="divide-y divide-accent-200 dark:divide-accent-700">
+                {recentActivity.map((activity, index) => {
+                  const StatusIcon = statusIcons[activity.status]
+                  return (
+                    <motion.div
+                      key={activity.id}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3, delay: index * 0.1 }}
+                      className="p-6 hover:bg-accent-50 dark:hover:bg-accent-800/50 transition-colors"
+                    >
+                      <div className="flex items-center space-x-4">
+                        <div className="flex-shrink-0">
+                          <StatusIcon className="h-5 w-5 text-accent-400" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-medium text-accent-900 dark:text-accent-100">
+                            {activity.title}
+                          </p>
+                          <p className="text-sm text-accent-600 dark:text-accent-400">
+                            {activity.description}
+                          </p>
+                        </div>
+                        <div className="flex-shrink-0 text-right">
+                          {activity.amount && (
+                            <p className="text-sm font-medium text-accent-900 dark:text-accent-100">
+                              {activity.amount}
+                            </p>
+                          )}
+                          <p className="text-xs text-accent-500">{activity.time}</p>
+                        </div>
+                        <div className="flex-shrink-0">
+                          <span className={classNames(
+                            statusColors[activity.status],
+                            'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium'
+                          )}>
+                            {activity.status}
+                          </span>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )
+                })}
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Summary Panel */}
+        <motion.div
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
+          <div className="space-y-6">
+            {/* Blockchain Status */}
+            <div className="card">
+              <div className="card-header">
+                <h3 className="text-sm font-medium text-accent-900 dark:text-accent-100">
+                  Network Status
+                </h3>
+              </div>
+              <div className="card-body">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center">
+                    <div className="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
+                    <span className="text-sm text-accent-600 dark:text-accent-400">StateSet Network</span>
+                  </div>
+                  <span className="text-sm font-medium text-green-600">Online</span>
+                </div>
+                <div className="mt-3 text-xs text-accent-500">
+                  Block Height: 1,234,567
+                </div>
+              </div>
+            </div>
+
+            {/* Wallet Summary */}
+            <div className="card">
+              <div className="card-header">
+                <h3 className="text-sm font-medium text-accent-900 dark:text-accent-100">
+                  Wallet Summary
+                </h3>
+              </div>
+              <div className="card-body">
+                <div className="space-y-3">
+                  <div className="flex justify-between">
+                    <span className="text-sm text-accent-600 dark:text-accent-400">STATE Balance</span>
+                    <span className="text-sm font-medium text-accent-900 dark:text-accent-100">1,250.50</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-sm text-accent-600 dark:text-accent-400">USD Value</span>
+                    <span className="text-sm font-medium text-accent-900 dark:text-accent-100">$3,126.25</span>
+                  </div>
+                  <div className="pt-2 border-t border-accent-200 dark:border-accent-700">
+                    <Link href="/wallet" className="text-sm text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300">
+                      Manage Wallet →
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Quick Links */}
+            <div className="card">
+              <div className="card-header">
+                <h3 className="text-sm font-medium text-accent-900 dark:text-accent-100">
+                  Quick Links
+                </h3>
+              </div>
+              <div className="card-body">
+                <div className="space-y-2">
+                  <Link href="/analytics" className="block text-sm text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300">
+                    View Analytics
+                  </Link>
+                  <Link href="/vote" className="block text-sm text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300">
+                    Governance Voting
+                  </Link>
+                  <Link href="/stake" className="block text-sm text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300">
+                    Stake Tokens
+                  </Link>
+                  <Link href="/support" className="block text-sm text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300">
+                    Get Support
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </div>
+  )
+}
+
+Dashboard.displayName = 'Dashboard'
