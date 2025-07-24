@@ -23,6 +23,7 @@ import { useTheme } from '../hooks/useTheme'
 
 const navigation = [
   { name: 'Dashboard', href: '/home', icon: HomeIcon },
+  { name: 'Orders', href: '/orders', icon: ShoppingBagIcon },
   { name: 'Invoices', href: '/invoices', icon: DocumentTextIcon },
   { name: 'Purchase Orders', href: '/purchaseorders', icon: ShoppingBagIcon },
   { name: 'Loans', href: '/loans', icon: BanknotesIcon },

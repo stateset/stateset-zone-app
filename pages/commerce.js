@@ -11,6 +11,7 @@ import UploadSmartContract from 'components/transactions/contract/UploadSmartCon
 import ChatWrapper from 'components/chat/ChatWrapper';
 import { motion } from 'framer-motion';
 import BuyNow from 'components/transactions/BuyNow';
+import BuyNowStablecoin from 'components/transactions/BuyNowStablecoin';
 import PayLater from 'components/transactions/PayLater';
 
 let easing = [0.175, 0.85, 0.42, 0.96];
@@ -72,8 +73,9 @@ const CommercePage = () => (
                                                                     </div>
                                                                     <h3 class="mt-4 text-sm text-gray-700">Earthen Bottle</h3>
                                                                     <p class="mt-1 text-lg font-medium text-gray-900">ⓢ 48</p>
-                                                                    <div class="mt-6 flex">
+                                                                    <div class="mt-6 flex flex-col space-y-2">
                                                                       <BuyNow product="Earthen Bottle" amount={48}/>
+                                                                      <BuyNowStablecoin product="Earthen Bottle" amount={48}/>
                                                                     </div>
                                                                 </a>
 
@@ -83,8 +85,9 @@ const CommercePage = () => (
                                                                     </div>
                                                                     <h3 class="mt-4 text-sm text-gray-700">Nomad Tumbler</h3>
                                                                     <p class="mt-1 text-lg font-medium text-gray-900">ⓢ 35</p>
-                                                                    <div class="mt-6 flex">
+                                                                    <div class="mt-6 flex flex-col space-y-2">
                                                                     <BuyNow product="Nomad Tumbler" amount={35}/>
+                                                                    <BuyNowStablecoin product="Nomad Tumbler" amount={35}/>
                                                                     </div>
                                                                 </a>
 
@@ -94,8 +97,9 @@ const CommercePage = () => (
                                                                     </div>
                                                                     <h3 class="mt-4 text-sm text-gray-700">Focus Paper Refill</h3>
                                                                     <p class="mt-1 text-lg font-medium text-blue-900">ⓢ 89</p>        
-                                                                    <div class="mt-6 flex">
+                                                                    <div class="mt-6 flex flex-col space-y-2">
                                                                     <BuyNow product="Focus Paper Refill" amount={89}/>
+                                                                    <BuyNowStablecoin product="Focus Paper Refill" amount={89}/>
                                                                     </div>
 
                                                                 </a>
@@ -106,8 +110,9 @@ const CommercePage = () => (
                                                                     </div>
                                                                     <h3 class="mt-4 text-sm text-gray-700">Machined Mechanical Pencil</h3>
                                                                     <p class="mt-1 text-lg font-medium text-gray-900">ⓢ 35</p>
-                                                                    <div class="mt-6 flex">
+                                                                    <div class="mt-6 flex flex-col space-y-2">
                                                                     <BuyNow product="Machined Mechanical Pencil" amount={35}/>
+                                                                    <BuyNowStablecoin product="Machined Mechanical Pencil" amount={35}/>
                                                                     </div>
                                                                 </a>
                                                             </div>
