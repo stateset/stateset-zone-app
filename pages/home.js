@@ -17,37 +17,11 @@ import {
   CheckCircleIcon,
   ExclamationTriangleIcon,
 } from '@heroicons/react/24/outline'
+import Layout from '../components/Layout'
+import QuickActionWidget from '../components/QuickActionWidget'
+import { SkeletonLoader, CardSkeleton } from '../components/LoadingSpinner'
 
-const quickActions = [
-  {
-    name: 'Create Invoice',
-    description: 'Generate a new invoice',
-    href: '/invoices/create',
-    icon: DocumentTextIcon,
-    color: 'bg-blue-500 hover:bg-blue-600',
-  },
-  {
-    name: 'New Purchase Order',
-    description: 'Create purchase order',
-    href: '/purchaseorders/create',
-    icon: ShoppingBagIcon,
-    color: 'bg-green-500 hover:bg-green-600',
-  },
-  {
-    name: 'Apply for Loan',
-    description: 'Request financing',
-    href: '/loans/create',
-    icon: BanknotesIcon,
-    color: 'bg-purple-500 hover:bg-purple-600',
-  },
-  {
-    name: 'Deploy Contract',
-    description: 'Create smart contract',
-    href: '/contracts/create',
-    icon: DocumentCheckIcon,
-    color: 'bg-orange-500 hover:bg-orange-600',
-  },
-]
+
 
 const metrics = [
   {
@@ -149,10 +123,12 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="space-y-8">
+    <Layout title="Dashboard">
       <Head>
         <title>Dashboard - StateSet Zone</title>
       </Head>
+      
+      <div className="space-y-8">
 
       {/* Welcome Section */}
       <motion.div
@@ -237,47 +213,7 @@ export default function Dashboard() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
       >
-        <div className="card">
-          <div className="card-header">
-            <h2 className="text-lg font-semibold text-accent-900 dark:text-accent-100">
-              Quick Actions
-            </h2>
-            <p className="text-sm text-accent-600 dark:text-accent-400">
-              Start your most common tasks
-            </p>
-          </div>
-          <div className="card-body">
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {quickActions.map((action, index) => (
-                <motion.div
-                  key={action.name}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3, delay: index * 0.1 }}
-                >
-                  <Link
-                    href={action.href}
-                    className="group relative block p-6 border border-accent-200 dark:border-accent-700 rounded-lg hover:border-primary-300 dark:hover:border-primary-600 transition-colors"
-                  >
-                    <div className="flex items-center">
-                      <div className={classNames(action.color, 'p-3 rounded-lg transition-colors')}>
-                        <action.icon className="h-6 w-6 text-white" />
-                      </div>
-                      <div className="ml-4">
-                        <h3 className="text-sm font-medium text-accent-900 dark:text-accent-100 group-hover:text-primary-600 dark:group-hover:text-primary-400">
-                          {action.name}
-                        </h3>
-                        <p className="text-xs text-accent-600 dark:text-accent-400">
-                          {action.description}
-                        </p>
-                      </div>
-                    </div>
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
+        <QuickActionWidget />
       </motion.div>
 
       {/* Recent Activity and Summary */}
@@ -430,7 +366,8 @@ export default function Dashboard() {
           </div>
         </motion.div>
       </div>
-    </div>
+      </div>
+    </Layout>
   )
 }
 
