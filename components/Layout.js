@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useState, useEffect } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -18,8 +18,11 @@ import {
   CogIcon,
   SunIcon,
   MoonIcon,
+  MagnifyingGlassIcon,
 } from '@heroicons/react/24/outline'
 import { useTheme } from '../hooks/useTheme'
+import NotificationCenter from './NotificationCenter'
+import GlobalSearch from './GlobalSearch'
 
 const navigation = [
   { name: 'Dashboard', href: '/home', icon: HomeIcon },
@@ -48,8 +51,22 @@ function classNames(...classes) {
 
 export default function Layout({ children, title = 'StateSet Zone' }) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [searchOpen, setSearchOpen] = useState(false)
   const router = useRouter()
   const { theme, toggleTheme } = useTheme()
+
+  // Keyboard shortcut for search (Cmd+K or Ctrl+K)
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if ((event.metaKey || event.ctrlKey) && event.key === 'k') {
+        event.preventDefault()
+        setSearchOpen(true)
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [])
 
   const pageTitle = title === 'StateSet Zone' ? title : `${title} - StateSet Zone`
 
@@ -229,6 +246,24 @@ export default function Layout({ children, title = 'StateSet Zone' }) {
                 </h1>
               </div>
               <div className="flex items-center gap-x-4 lg:gap-x-6">
+                {/* Search */}
+                <button
+                  type="button"
+                  onClick={() => setSearchOpen(true)}
+                  className="flex items-center gap-x-2 p-2 text-accent-400 hover:text-accent-500 dark:text-accent-500 dark:hover:text-accent-300 transition-colors"
+                >
+                  <MagnifyingGlassIcon className="h-5 w-5" />
+                  <span className="hidden sm:block text-sm">
+                    Search
+                  </span>
+                  <kbd className="hidden sm:block ml-1 rounded border border-accent-200 dark:border-accent-600 bg-accent-100 dark:bg-accent-700 px-1.5 py-0.5 text-xs text-accent-600 dark:text-accent-300">
+                    ⌘K
+                  </kbd>
+                </button>
+
+                {/* Notifications */}
+                <NotificationCenter />
+
                 {/* Theme toggle */}
                 <button
                   type="button"
@@ -286,6 +321,9 @@ export default function Layout({ children, title = 'StateSet Zone' }) {
             </div>
           </main>
         </div>
+
+        {/* Global Search Modal */}
+        <GlobalSearch isOpen={searchOpen} setIsOpen={setSearchOpen} />
       </div>
     </>
   )
